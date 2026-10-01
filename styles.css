@@ -109,7 +109,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 /* Hero: app icon, handwritten name, tagline in four beats, live dot, store badges */
-.hero { padding: 80px 0 64px; text-align: center; }
+.hero { padding: 80px 0 56px; text-align: center; }
 .hero .wrap { display: flex; flex-direction: column; align-items: center; }
 .hero-brand {
   margin: 0;
@@ -173,24 +173,25 @@ a:hover { text-decoration-thickness: 2px; }
 @keyframes drop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
 @keyframes ripple { from { transform: scale(1); opacity: 0.8; } to { transform: scale(3.6); opacity: 0; } }
 /* Badges: centered under the dot */
-/* Badges sit in a plain poster frame: black outline and a hard offset shadow (the badges themselves stay untouched) */
-.hero-badges {
-  justify-content: center;
-  gap: 16px;
-  margin-top: 60px;
-  padding: 22px 26px;
-  background: var(--bg);
-  border: 2px solid var(--fg);
-  border-radius: 4px;
-  box-shadow: 6px 6px 0 var(--fg);
+/* Badges sit in a tinted tray just below the white hero; they lift slightly on hover */
+.hero-tray {
+  background: #E6E6E3;
+  border-top: 1px solid #D6D6D2;
+  padding: 32px 20px 36px;
 }
-.hero-badges .badge img { height: 52px; }
+.hero-badges { justify-content: center; gap: 18px; }
+.hero-badges .badge { border-radius: 9px; transition: transform 0.15s ease; }
+.hero-badges .badge:hover { transform: translateY(-3px); }
+.hero-badges .badge:active { transform: translateY(0); }
+.hero-badges .badge:focus-visible { outline: 3px solid var(--signal); outline-offset: 4px; }
+.hero-badges .badge img { height: 56px; }
 @media (max-width: 600px) {
   .hero { padding: 56px 0 40px; }
   .hero-tagline { margin-top: 32px; gap: 6px 1.2em; }
   .hero-tagline .half { gap: 1.2em; }
-  .hero-badges { flex-direction: column; align-items: center; gap: 12px; margin-top: 44px; padding: 18px 20px; }
-  .hero-badges .badge img { height: 50px; }
+  .hero-tray { padding: 26px 20px 30px; }
+  .hero-badges { flex-direction: column; align-items: center; gap: 14px; }
+  .hero-badges .badge img { height: 52px; }
 }
 .footer-tag span { display: inline-block; white-space: nowrap; }
 @media (max-width: 360px) {
@@ -370,6 +371,8 @@ a:hover { text-decoration-thickness: 2px; }
 
 @media (prefers-reduced-motion: reduce) {
   .hero-tagline .beat, .hero-dot, .hero-dot::after { animation: none; }
+  .hero-badges .badge { transition: none; }
+  .hero-badges .badge:hover { transform: none; }
 }
 
 /* White blocks: landing header, hero and footer flip the color tokens to black on white */
