@@ -107,23 +107,9 @@ a:hover { text-decoration-thickness: 2px; }
   justify-content: space-between;
   gap: 16px;
 }
-.header-link {
-  flex-shrink: 0;
-  font-weight: 600;
-  color: var(--fg);
-  text-decoration: none;
-  padding: 8px 14px;
-  border: 2px solid var(--fg);
-  border-radius: 999px;
-  font-size: 0.95rem;
-}
-.header-link:hover { background: var(--fg); color: var(--bg); }
-@media (max-width: 420px) {
-  .header-link { padding: 6px 10px; font-size: 0.85rem; }
-}
 
 /* Hero: app icon, handwritten name and tagline, centered */
-.hero { padding: 48px 0 112px; text-align: center; }
+.hero { padding: 96px 0 112px; text-align: center; }
 .hero-brand {
   margin: 0;
   display: flex;
@@ -154,8 +140,6 @@ a:hover { text-decoration-thickness: 2px; }
 /* The tagline only breaks between its two halves */
 .hero-tagline span, .footer-tag span { display: inline-block; white-space: nowrap; }
 .hero-badges { justify-content: center; margin-top: 36px; }
-.home .site-header .wrap { justify-content: flex-end; }
-.home .site-header .logo { display: none; }
 
 /* Official store badges, matched to the same height */
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
@@ -415,7 +399,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 
 /* White blocks: landing header, hero and footer flip the color tokens to black on white */
-.home .site-header, .hero, .site-footer {
+.hero, .site-footer {
   --bg: #FFFFFF;
   --fg: #000000;
   --fg-soft: #5C5C5C;
