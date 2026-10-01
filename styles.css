@@ -151,6 +151,9 @@ a:hover { text-decoration-thickness: 2px; }
   padding-left: 0.14em;
   color: var(--fg);
 }
+/* The tagline only breaks between its two halves */
+.hero-tagline span, .footer-tag span { display: inline-block; white-space: nowrap; }
+.hero-buttons { justify-content: center; margin-top: 36px; }
 .home .site-header .wrap { justify-content: flex-end; }
 .home .site-header .logo { display: none; }
 
@@ -168,7 +171,7 @@ a:hover { text-decoration-thickness: 2px; }
   border-radius: 12px;
   font-size: 1.05rem;
 }
-.store-button:hover { background: var(--poster-yellow); }
+.store-button:hover { background: var(--poster-yellow); color: #000; }
 .store-button svg { width: 20px; height: 20px; }
 .store-note {
   display: block;
