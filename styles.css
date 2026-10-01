@@ -354,6 +354,8 @@ body.light {
   color: var(--fg);
 }
 .legal { padding: 0 0 80px; }
+/* Full-width line above the footer, matching the line under the top bar */
+body.light .site-footer { border-top: 1px solid var(--line); }
 .legal-title, .legal article { max-width: 720px; margin: 0 auto; }
 .legal-title { padding: 56px 0 8px; }
 .legal-title h1 { margin: 0; font-size: clamp(2rem, 6vw, 2.6rem); line-height: 1; }
