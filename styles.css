@@ -129,8 +129,9 @@ a:hover { text-decoration-thickness: 2px; }
   height: auto;
   aspect-ratio: 1800 / 359;
 }
+/* Two groups: logo and name, then tagline and badges, with a wide gap between */
 .hero-tagline {
-  margin: 24px 0 0;
+  margin: clamp(44px, 6vw, 64px) 0 0;
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   line-height: 1.2;
   letter-spacing: 0.14em;
@@ -139,7 +140,7 @@ a:hover { text-decoration-thickness: 2px; }
 }
 /* The tagline only breaks between its two halves */
 .hero-tagline span, .footer-tag span { display: inline-block; white-space: nowrap; }
-.hero-badges { justify-content: center; margin-top: 36px; }
+.hero-badges { justify-content: center; margin-top: 24px; }
 
 /* Official store badges, matched to the same height */
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
