@@ -154,8 +154,8 @@ a:hover { text-decoration-thickness: 2px; }
   position: relative;
   display: block;
   flex: none;
-  width: 0.5em;
-  height: 0.5em;
+  width: 0.59em;
+  height: 0.59em;
   margin-top: -0.08em;
   border-radius: 50%;
   background: var(--signal);
