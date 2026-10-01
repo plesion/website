@@ -14,9 +14,9 @@
   --poster-mint: #7FE0C2;
   --radius-small: 4px;
   --wrap: 1120px;
-  --font: "IBM Plex Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-title: "IBM Plex Sans Condensed", "Arial Narrow", sans-serif;
-  --font-data: "Roboto", system-ui, sans-serif;
+  --font: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-title: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
   --icon-glow: drop-shadow(0 0 1px #fff) drop-shadow(0 0 6px rgba(255,255,255,0.55));
   color-scheme: dark;
 }
@@ -62,7 +62,7 @@ a:hover { text-decoration-thickness: 2px; }
   z-index: 10;
 }
 
-/* Titles: condensed all caps. Coordinates, distances, dates: Roboto */
+/* Titles: Roboto Bold, all caps. Everything else: Roboto Regular */
 .section h2, .closing h2, .legal h1, .legal h2, .legal h3,
 .steps h3, .use h3, .hero-tagline, .footer-tag {
   font-family: var(--font-title);
@@ -181,6 +181,9 @@ a:hover { text-decoration-thickness: 2px; }
   .hero-badges .badge img { height: 56px; }
 }
 .footer-tag span { display: inline-block; white-space: nowrap; }
+@media (max-width: 360px) {
+  .hero-tagline { font-size: 1.05rem; }
+}
 
 /* Official store badges, matched to the same height */
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
@@ -220,7 +223,7 @@ a:hover { text-decoration-thickness: 2px; }
   border-radius: 50%;
   border: 2px solid var(--fg);
   font-family: var(--font-data);
-  font-weight: 500;
+  font-weight: 400;
   font-variant-numeric: tabular-nums;
   margin-bottom: 16px;
 }
