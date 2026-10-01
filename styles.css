@@ -180,12 +180,14 @@ a:hover { text-decoration-thickness: 2px; }
 @keyframes drop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
 @keyframes ripple { from { transform: scale(1); opacity: 0.8; } to { transform: scale(3.6); opacity: 0; } }
 /* Badges: centered under the dot */
-/* Badges sit on a band of darkened concrete (from the "Post here" wall photo) just below the white hero; they lift slightly on hover */
+/* Badges sit on a 240px band of raw concrete (from the "Post here" wall photo) just below the white hero; they lift slightly on hover */
 .hero-tray {
-  background:
-    linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)),
-    #555555 url(/assets/concrete.jpg) center / cover no-repeat;
-  padding: 32px 20px 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  padding: 24px 20px;
+  background: #808080 url(/assets/concrete.jpg) center / cover no-repeat;
 }
 .hero-badges { justify-content: center; gap: 18px; }
 .hero-badges .badge { border-radius: 9px; transition: transform 0.15s ease; }
@@ -197,7 +199,6 @@ a:hover { text-decoration-thickness: 2px; }
   .hero { padding: 56px 0 40px; }
   .hero-tagline { margin-top: 32px; gap: 6px 1.2em; }
   .hero-tagline .half { gap: 1.2em; }
-  .hero-tray { padding: 26px 20px 30px; }
   .hero-badges { flex-direction: column; align-items: center; gap: 14px; }
   .hero-badges .badge img { height: 52px; }
 }
