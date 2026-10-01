@@ -153,26 +153,14 @@ a:hover { text-decoration-thickness: 2px; }
 }
 /* The tagline only breaks between its two halves */
 .hero-tagline span, .footer-tag span { display: inline-block; white-space: nowrap; }
-.hero-buttons { justify-content: center; margin-top: 36px; }
+.hero-badges { justify-content: center; margin-top: 36px; }
 .home .site-header .wrap { justify-content: flex-end; }
 .home .site-header .logo { display: none; }
 
-.store-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
-.store-button {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  background: var(--fg);
-  color: var(--bg);
-  text-decoration: none;
-  font-family: var(--font);
-  font-weight: 600;
-  padding: 14px 22px;
-  border-radius: 12px;
-  font-size: 1.05rem;
-}
-.store-button:hover { background: var(--poster-yellow); color: #000; }
-.store-button svg { width: 20px; height: 20px; }
+/* Official store badges, matched to the same height */
+.badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
+.badge { display: block; border-radius: 8px; }
+.badge img { display: block; height: 48px; width: auto; }
 .store-note {
   display: block;
   margin-top: 12px;
