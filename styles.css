@@ -64,7 +64,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Titles: condensed all caps. Coordinates, distances, dates: Roboto */
 .section h2, .closing h2, .legal h1, .legal h2, .legal h3,
-.steps h3, .use h3, .poster, .hero-tagline, .footer-tag {
+.steps h3, .use h3, .hero-tagline, .footer-tag {
   font-family: var(--font-title);
   font-weight: 700;
   text-transform: uppercase;
@@ -108,8 +108,9 @@ a:hover { text-decoration-thickness: 2px; }
   gap: 16px;
 }
 
-/* Hero: app icon, handwritten name and tagline, centered */
-.hero { padding: 96px 0 112px; text-align: center; }
+/* Hero: app icon, handwritten name, tagline in four beats, live dot, store badges */
+.hero { padding: 96px 0 32px; text-align: center; }
+.hero .wrap { display: flex; flex-direction: column; align-items: center; }
 .hero-brand {
   margin: 0;
   display: flex;
@@ -129,113 +130,60 @@ a:hover { text-decoration-thickness: 2px; }
   height: auto;
   aspect-ratio: 1800 / 359;
 }
-/* Two groups: logo and name, then tagline and badges, with a wide gap between */
+/* Four phrases with wide pauses; the two halves wrap as units on narrow screens */
 .hero-tagline {
-  margin: clamp(44px, 6vw, 64px) 0 0;
+  margin: 52px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px 1.6em;
   font-size: clamp(1.05rem, 2.2vw, 1.35rem);
   line-height: 1.2;
   letter-spacing: 0.14em;
-  padding-left: 0.14em;
   color: var(--fg);
 }
-/* The tagline only breaks between its two halves */
-.hero-tagline span, .footer-tag span { display: inline-block; white-space: nowrap; }
-.hero-badges { justify-content: center; margin-top: 24px; }
+.hero-tagline .half { display: inline-flex; gap: 1.6em; white-space: nowrap; }
+.hero-tagline .beat { display: inline-block; animation: beat 0.5s ease-out both; }
+.hero-tagline .half:first-child .beat:nth-child(2) { animation-delay: 0.4s; }
+.hero-tagline .half:last-child .beat:nth-child(1) { animation-delay: 0.8s; }
+.hero-tagline .half:last-child .beat:nth-child(2) { animation-delay: 1.2s; }
+/* The "you are here" dot from the app's map, centered under the line */
+.hero-dot {
+  position: relative;
+  display: block;
+  width: 12px;
+  height: 12px;
+  margin-top: 22px;
+  border-radius: 50%;
+  background: var(--signal);
+  animation: drop 0.45s ease-out 1.65s both;
+}
+.hero-dot::after {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 50%;
+  border: 2px solid var(--signal);
+  animation: ripple 2.4s ease-out infinite;
+}
+@keyframes beat { from { opacity: 0.15; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+@keyframes drop { from { opacity: 0; transform: scale(0.3); } to { opacity: 1; transform: none; } }
+@keyframes ripple { from { transform: scale(1); opacity: 0.8; } to { transform: scale(3.6); opacity: 0; } }
+/* Badges: secondary, bottom right on desktop */
+.hero-badges { align-self: flex-end; justify-content: flex-end; gap: 20px; margin-top: 88px; }
+.hero-badges .badge img { height: 44px; }
+@media (max-width: 600px) {
+  .hero { padding: 64px 0 32px; }
+  .hero-tagline { margin-top: 28px; gap: 6px 1.2em; }
+  .hero-tagline .half { gap: 1.2em; }
+  .hero-badges { align-self: center; flex-direction: column; align-items: center; gap: 14px; margin-top: 56px; }
+}
+.footer-tag span { display: inline-block; white-space: nowrap; }
 
 /* Official store badges, matched to the same height */
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .badge { display: block; border-radius: 8px; }
 .badge img { display: block; height: 48px; width: auto; }
-.store-note {
-  display: block;
-  margin-top: 12px;
-  font-size: 0.9rem;
-  color: var(--fg-soft);
-}
-
-/* The street map with pinned posters */
-.street {
-  position: relative;
-  aspect-ratio: 1 / 1;
-  max-width: 520px;
-  width: 100%;
-  justify-self: center;
-  background-color: var(--map);
-  background-image:
-    linear-gradient(var(--road) 0 0),
-    linear-gradient(var(--road) 0 0),
-    linear-gradient(var(--road) 0 0),
-    repeating-linear-gradient(0deg, transparent 0 39px, rgba(255,255,255,0.05) 39px 40px),
-    repeating-linear-gradient(90deg, transparent 0 39px, rgba(255,255,255,0.05) 39px 40px);
-  background-size: 100% 22px, 26px 100%, 18px 100%, auto, auto;
-  background-position: 0 58%, 34% 0, 78% 0, 0 0, 0 0;
-  background-repeat: no-repeat, no-repeat, no-repeat, repeat, repeat;
-  border-radius: 28px;
-  overflow: hidden;
-  border: 2px solid var(--fg);
-}
-
-.you {
-  position: absolute;
-  left: 50%;
-  top: 60%;
-  width: 18px;
-  height: 18px;
-  margin: -9px 0 0 -9px;
-  border-radius: 50%;
-  background: var(--signal);
-  border: 3px solid var(--fg);
-  box-shadow: 0 0 0 1px var(--signal);
-}
-.you::after {
-  content: "";
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 2px solid var(--link);
-  animation: ripple 2.8s ease-out infinite;
-}
-@keyframes ripple {
-  from { transform: scale(1); opacity: 0.8; }
-  to { transform: scale(7); opacity: 0; }
-}
-
-.poster {
-  position: absolute;
-  width: 44%;
-  padding: 14px 14px 12px;
-  color: var(--poster-ink);
-  border: 2px solid var(--poster-ink);
-  border-radius: var(--radius-small);
-  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
-  line-height: 1.15;
-  box-shadow: 4px 4px 0 var(--fg);
-}
-.poster::before {
-  content: "";
-  position: absolute;
-  top: -7px;
-  left: 50%;
-  width: 12px;
-  height: 12px;
-  margin-left: -6px;
-  border-radius: 50%;
-  background: var(--fg);
-  border: 2px solid var(--poster-ink);
-}
-.poster .dist {
-  display: block;
-  margin-top: 10px;
-  font-family: var(--font-data);
-  font-weight: 500;
-  font-size: 0.78em;
-  text-transform: none;
-  letter-spacing: 0;
-  font-variant-numeric: tabular-nums;
-}
-.poster-1 { background: var(--poster-yellow); left: 6%; top: 8%; transform: rotate(-4deg); }
-.poster-2 { background: var(--poster-pink); right: 6%; top: 18%; transform: rotate(3deg); }
-.poster-3 { background: var(--poster-mint); left: 10%; bottom: 7%; transform: rotate(2deg); width: 40%; }
 
 /* Sections */
 .section, .closing {
@@ -396,7 +344,7 @@ a:hover { text-decoration-thickness: 2px; }
 .legal li { margin-bottom: 6px; }
 
 @media (prefers-reduced-motion: reduce) {
-  .you::after { animation: none; opacity: 0; }
+  .hero-tagline .beat, .hero-dot, .hero-dot::after { animation: none; }
 }
 
 /* White blocks: landing header, hero and footer flip the color tokens to black on white */
