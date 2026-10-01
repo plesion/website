@@ -122,30 +122,36 @@ a:hover { text-decoration-thickness: 2px; }
   .header-link { padding: 6px 10px; font-size: 0.85rem; }
 }
 
-/* Hero */
-.hero { padding: 32px 0 72px; }
-.hero .wrap {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 48px;
+/* Hero: app icon, handwritten name and tagline, centered */
+.hero { padding: 48px 0 112px; text-align: center; }
+.hero-brand {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  gap: 36px;
 }
-@media (min-width: 900px) {
-  .hero .wrap { grid-template-columns: 1.05fr 1fr; gap: 56px; }
-  .hero { padding: 48px 0 96px; }
+.hero-icon {
+  width: clamp(160px, 24vw, 240px);
+  height: auto;
+  aspect-ratio: 1 / 1;
+  filter: drop-shadow(0 0 2px #fff) drop-shadow(0 0 14px rgba(255,255,255,0.5));
 }
-.hero h1 {
-  margin: 0 0 20px;
-  font-size: clamp(3.2rem, 9vw, 6.4rem);
-  line-height: 0.9;
-  letter-spacing: 0;
+.hero-word {
+  width: clamp(280px, 40vw, 500px);
+  height: auto;
+  aspect-ratio: 1800 / 359;
 }
-.hero p.lede {
-  margin: 0 0 32px;
-  font-size: 1.2rem;
-  color: var(--fg-soft);
-  max-width: 34ch;
+.hero-tagline {
+  margin: 24px 0 0;
+  font-family: var(--font-data);
+  font-weight: 400;
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  letter-spacing: 0.01em;
+  color: var(--fg);
 }
+.home .site-header .wrap { justify-content: flex-end; }
+.home .site-header .logo { display: none; }
 
 .store-buttons { display: flex; flex-wrap: wrap; gap: 12px; }
 .store-button {
