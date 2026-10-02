@@ -438,6 +438,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live-cta:hover { transform: translateY(-2px); }
 .live-cta:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
 .live-photo { position: absolute; inset: 0; background: #1a1a1a url(/assets/photo-city-dusk.jpg) center / cover no-repeat; }
+.live--brooklyn .live-photo { background-image: url(/assets/photo-city-day.jpg); }
 .live-chip { position: absolute; left: calc(43vw + 1.3vw); bottom: 0.75vw; display: grid; grid-template-columns: auto auto; gap: 0.55vw 1.1vw; padding: 0.8vw; background: rgba(12, 14, 16, 0.86); border: 1px solid rgba(255, 255, 255, 0.10); font: 400 max(9px, 0.56vw)/1 "IBM Plex Mono", ui-monospace, monospace; color: #E6E4DE; }
 @media (min-width: 901px) and (max-width: 1279px) {
   .live-ctas { grid-auto-flow: row; align-self: stretch; }
