@@ -437,7 +437,6 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live-photo { position: absolute; inset: 0; background: #1a1a1a url(/assets/photo-city-dusk.jpg) center / cover no-repeat; }
 .live--brooklyn .live-photo { background-image: url(/assets/photo-city-day.jpg); }
 .live--murals .live-photo { background-image: url(/assets/photo-city-murals.jpg); }
-.live-chip { position: absolute; left: calc(43vw + 1.3vw); bottom: 0.75vw; display: grid; grid-template-columns: auto auto; gap: 0.55vw 1.1vw; padding: 0.8vw; background: rgba(12, 14, 16, 0.86); border: 1px solid rgba(255, 255, 255, 0.10); font: 400 max(9px, 0.56vw)/1 "IBM Plex Mono", ui-monospace, monospace; color: #E6E4DE; }
 @media (max-width: 900px) {
   .live { display: block; min-height: 0; padding-left: 0; }
   .live-text { width: auto; padding: 52px 22px 44px; box-shadow: none; }
@@ -445,7 +444,6 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .live-title { font-size: clamp(44px, 14vw, 72px); margin-bottom: 20px; }
   .live-lede { max-width: 34ch; font-size: 15px; margin-bottom: 24px; }
   .live-photo { position: relative; inset: auto; aspect-ratio: 4 / 5; background-position: 72% center; }
-  .live-chip { left: 12px; bottom: 12px; gap: 7px 20px; padding: 11px 12px; font-size: 10px; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .live-photo { aspect-ratio: 3 / 2; } }
 
