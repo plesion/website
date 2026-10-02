@@ -598,3 +598,15 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 @media (min-width: 601px) {
   .duo-brand, .duo-poster { aspect-ratio: 1 / 1; padding-top: 0; padding-bottom: 0; }
 }
+
+/* Live strip on desktop: readouts share one top line, just under the words; definitions share the bottom line */
+@media (min-width: 901px) {
+  .ns-read { flex: 0 0 auto; justify-content: flex-start; padding: 2.6vw 0 1.2vw; }
+  .ns-desc { margin-top: auto; }
+  .ns-cell:last-child .ns-read { flex-direction: row; align-items: center; justify-content: flex-start; gap: 1vw; }
+  .ns-radar { width: 2.6vw; margin: 0; order: 2; }
+  .ns-val { font-size: 2.6vw; line-height: 1; }
+  .ns-clock { font-size: 2.6vw; }
+  .ns-small { font-size: 2.6vw; }
+  .ns-tags { min-height: 2.6vw; align-items: center; }
+}
