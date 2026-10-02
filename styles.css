@@ -545,6 +545,8 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live-dl-icon path[fill="#fff"] { fill: var(--c); }
 .live-dl-icon .icon-stroke { fill: none; stroke: var(--c); stroke-width: 1px; vector-effect: non-scaling-stroke; }
 .live-cta { grid-column: 2; display: flex; align-items: center; justify-content: center; height: var(--s); padding: 0 max(10px, 0.8vw); color: var(--c); border: 1px solid var(--c); border-radius: calc(var(--s) * 0.227); font: 400 max(11px, 0.72vw)/1 var(--font-data); letter-spacing: 0.02em; white-space: nowrap; text-decoration: none; transition: background 0.15s ease, color 0.15s ease; }
+/* Second line: "PLESION Android" starts under the icon and ends under "PLESION iOS" */
+.live-cta + .live-cta { grid-column: 1 / -1; }
 .live-cta:hover { background: var(--c); color: #0C0E10; }
 .live-cta:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 @media (max-width: 900px) { .live-dl { --s: 38px; } .live-cta { font-size: 12px; } }
