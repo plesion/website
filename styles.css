@@ -558,3 +558,17 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .foot-dl .live-cta { grid-column: auto; font-size: 12px; }
 .site-footer .foot-dl .live-cta { color: var(--c); }
 .site-footer .foot-dl .live-cta:hover { background: var(--c); color: #FFFFFF; text-decoration: none; }
+
+/* Live strip on desktop: the four words lead each column in giant poster capitals */
+@media (min-width: 601px) {
+  .ns-cell { min-height: 36vw; padding: 2.6vw 2vw 2.8vw; }
+  .ns-label { font: 700 4.4vw/0.86 var(--font-title); letter-spacing: -0.03em; gap: 0.25em; align-items: flex-start; }
+  .ns-light { width: 0.14em; height: 0.14em; margin-top: 0.1em; order: 2; }
+  .ns-read { justify-content: flex-end; padding: 2vw 0 1.2vw; }
+  .ns-val { font-size: 2.6vw; }
+  .ns-clock { font-size: 4.2vw; }
+  .ns-small { font-size: 2.6vw; }
+  .ns-radar { width: 5.6vw; }
+  .ns-tags span { font-size: max(11px, 0.95vw); padding: 0.55vw 0.9vw; }
+  .ns-desc { font-size: max(13px, 1vw); }
+}
