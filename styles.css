@@ -14,9 +14,9 @@
   --poster-mint: #7FE0C2;
   --radius-small: 4px;
   --wrap: 1120px;
-  --font: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-title: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-data: Roboto, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font: Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-title: "Inter Tight", Inter, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-data: "IBM Plex Mono", ui-monospace, monospace;
   --icon-glow: drop-shadow(0 0 1px #fff) drop-shadow(0 0 6px rgba(255,255,255,0.55));
   color-scheme: dark;
 }
@@ -62,13 +62,13 @@ a:hover { text-decoration-thickness: 2px; }
   z-index: 10;
 }
 
-/* Titles: Roboto Bold, all caps. Everything else: Roboto Regular */
+/* Fonts: Inter Tight Bold for titles (all caps), Inter for running text, IBM Plex Mono for sentences, labels and small print */
 .section h2, .closing h2, .legal-title h1, .legal h2, .legal h3,
 .steps h3, .use h3, .text-band h2, .hero-tagline, .footer-tag {
   font-family: var(--font-title);
   font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.01em;
+  letter-spacing: -0.02em;
   text-wrap: balance;
 }
 
@@ -101,7 +101,7 @@ a:hover { text-decoration-thickness: 2px; }
   justify-content: space-between;
   gap: 12px 24px;
 }
-.legal-tabs { display: flex; gap: 24px; font-size: 1rem; }
+.legal-tabs { display: flex; gap: 24px; font-family: var(--font-data); font-size: 0.9rem; }
 .legal-tabs a {
   color: var(--fg-soft);
   text-decoration: none;
@@ -109,10 +109,10 @@ a:hover { text-decoration-thickness: 2px; }
   border-bottom: 2px solid transparent;
 }
 .legal-tabs a:hover { color: var(--fg); }
-.legal-tabs a[aria-current="page"] { color: var(--fg); font-weight: 700; border-bottom-color: var(--fg); }
+.legal-tabs a[aria-current="page"] { color: var(--fg); border-bottom-color: var(--fg); }
 @media (max-width: 600px) {
   .site-header .wrap { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .legal-tabs { gap: 20px; font-size: 0.95rem; }
+  .legal-tabs { gap: 20px; font-size: 0.85rem; }
 }
 
 /* Hero: app icon, handwritten name, tagline in four beats, live dot, store badges */
@@ -390,9 +390,10 @@ body.light {
 body.light .site-footer { border-top: 1px solid var(--line); }
 .legal-title, .legal article { max-width: 720px; margin: 0 auto; }
 .legal-title { padding: 56px 0 8px; }
-.legal-title h1 { margin: 0; font-size: clamp(2rem, 6vw, 2.6rem); line-height: 1; }
-.legal-date { margin: 12px 0 0; color: var(--fg-soft); font-size: 0.95rem; }
-.legal article { padding-top: 24px; font-size: 1.0625rem; line-height: 1.7; color: #1A1A1A; }
+.legal-title h1 { margin: 0; font-size: clamp(2.2rem, 6.5vw, 3rem); line-height: 0.92; }
+.legal-date { margin: 14px 0 0; color: var(--fg-soft); font-family: var(--font-data); font-size: 0.875rem; }
+.legal article { padding-top: 24px; font-size: 1rem; line-height: 1.7; color: #1A1A1A; }
+.legal h2, .legal h3 { letter-spacing: 0; }
 .legal h2 { margin: 48px 0 12px; font-size: 1.25rem; line-height: 1.2; color: var(--fg); }
 .legal h3 { margin: 32px 0 8px; font-size: 1.1rem; line-height: 1.25; color: var(--fg); }
 .legal p, .legal li { max-width: 68ch; }
@@ -490,7 +491,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 /* Section titles in the poster style: Inter Tight Bold, all caps, tight */
 .text-band h2 { font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 0.88; }
 
-/* Sentences in IBM Plex Mono, smaller than the earlier Roboto sentences */
+/* Sentences in IBM Plex Mono */
 .text-band p, .tray-line { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: clamp(0.95rem, 1.25vw, 1.15rem); line-height: 1.5; letter-spacing: -0.01em; }
 .live-lede { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: max(13px, 0.88vw); letter-spacing: -0.01em; }
 
