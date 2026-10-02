@@ -64,7 +64,7 @@ a:hover { text-decoration-thickness: 2px; }
 
 /* Titles: Roboto Bold, all caps. Everything else: Roboto Regular */
 .section h2, .closing h2, .legal-title h1, .legal h2, .legal h3,
-.steps h3, .use h3, .hero-tagline, .footer-tag {
+.steps h3, .use h3, .text-band h2, .hero-tagline, .footer-tag {
   font-family: var(--font-title);
   font-weight: 700;
   text-transform: uppercase;
@@ -211,6 +211,18 @@ a:hover { text-decoration-thickness: 2px; }
 .badges { display: flex; flex-wrap: wrap; align-items: center; gap: 12px; }
 .badge { display: block; border-radius: 8px; }
 .badge img { display: block; height: 48px; width: auto; }
+
+/* Middle: full-width pictures alternating with text bands */
+.photo-band { margin: 0; background: #111; }
+.photo-band img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+@media (max-width: 640px) {
+  /* Taller crop on phones, kept to the right where the posts are */
+  .photo-band img { aspect-ratio: 4 / 3; object-position: right center; }
+}
+.text-band { padding: 88px 0; text-align: center; }
+.text-band h2 { margin: 0 auto 18px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; max-width: 20ch; }
+.text-band p { margin: 0 auto; max-width: 46ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.6; color: var(--fg-soft); }
+@media (max-width: 640px) { .text-band { padding: 64px 0; } }
 
 /* Sections */
 .section, .closing {
