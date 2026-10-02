@@ -231,15 +231,14 @@ a:hover { text-decoration-thickness: 2px; }
   /* Taller crop on phones, kept to the right where the posts are */
   .photo-band img { aspect-ratio: 4 / 3; object-position: right center; }
 }
-.photo-band { position: relative; }
+.photo-band { position: relative; overflow: hidden; }
 /* Location block, as in the app's top bar: dark grey, green outline, DMS coordinates.
-   Rests slightly below and left of the picture's centre. With the script, it waits until the whole
-   picture is on screen, slides up from the picture's bottom edge, then stays put on the screen
-   while the picture scrolls under it, and fades once the picture has gone past. */
+   Anchored slightly left of centre, slightly above the picture's bottom edge, and moves with the picture.
+   With the script, it slides up into place once the whole picture is on screen, then stays. */
 .loc-block {
   position: absolute;
   left: 42%;
-  top: 58%;
+  bottom: 7%;
   display: grid;
   gap: 2px;
   padding: 0.55em 1.25em 0.6em;
@@ -253,22 +252,22 @@ a:hover { text-decoration-thickness: 2px; }
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%);
 }
 .js-loc .loc-block {
-  position: fixed;
-  z-index: 5;
-  left: var(--x, 42%);
-  top: var(--y, 58%);
-  transform: translate(-50%, calc(-50% + var(--dy, 0px)));
   opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition: opacity 0.2s ease, visibility 0s linear 0.2s;
+  transform: translate(-50%, 48px);
+  transition: opacity 0.25s ease, transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.js-loc .loc-block.is-on { opacity: 1; visibility: visible; transition: opacity 0.2s ease, visibility 0s; }
-.js-loc .loc-block.is-entering { transition: opacity 0.15s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), visibility 0s; }
-@media (max-width: 640px) { .loc-block { border-width: 1.5px; } }
+.js-loc .loc-block.is-on { opacity: 1; transform: translateX(-50%); }
+@media (max-width: 640px) {
+  .loc-block { border-width: 1.5px; }
+  .js-loc .loc-block { transform: translate(-50%, 24px); }
+  .js-loc .loc-block.is-on { transform: translateX(-50%); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .js-loc .loc-block, .js-loc .loc-block.is-on { transform: translateX(-50%); transition: opacity 0.3s ease; }
+}
 .text-band { padding: 88px 0; text-align: center; }
 .text-band h2 { margin: 0 auto 18px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; max-width: 20ch; }
 .text-band p { margin: 0 auto; max-width: 46ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.6; color: var(--fg-soft); }

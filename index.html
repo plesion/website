@@ -203,71 +203,43 @@
     </div>
   </footer>
   <script>
-  // Location block: once the whole picture is on screen, it slides up from the picture's bottom edge to
-  // just below and left of centre, then stays fixed on the screen while the picture scrolls under it,
-  // and fades out when the picture no longer lies beneath it. It replays after the picture leaves the screen.
+  // Location block: slides up into its anchor once the whole picture is on screen, then stays there
   (function () {
     var figs = [].slice.call(document.querySelectorAll('.photo-band'));
     if (!figs.length) return;
     document.documentElement.classList.add('js-loc');
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var X = 0.42, Y = 0.58, MARGIN = 10;
-    var items = figs.map(function (f) {
-      var b = f.querySelector('.loc-block'), v = b.querySelector('.loc-v');
-      return { f: f, b: b, v: v, target: v.textContent, armed: true, ay: 0 };
-    });
 
-    function settle(it) {
+    function settle(v) {
       if (calm) return;
-      var t0 = null, dur = 700, t = it.target;
-      (function frame(now) {
+      var t = v.textContent, t0 = null, dur = 700;
+      requestAnimationFrame(function frame(now) {
         if (!t0) t0 = now;
         var p = Math.min((now - t0) / dur, 1), fixed = Math.floor(p * t.length), out = '';
         for (var i = 0; i < t.length; i++) out += (i < fixed || !/[0-9]/.test(t[i])) ? t[i] : String(Math.floor(Math.random() * 10));
-        it.v.textContent = out;
+        v.textContent = out;
         if (p < 1) requestAnimationFrame(frame);
-      })(performance.now());
-    }
-
-    function update() {
-      var vh = window.innerHeight;
-      items.forEach(function (it) {
-        var r = it.f.getBoundingClientRect(), b = it.b, h = b.offsetHeight;
-        b.style.setProperty('--x', (r.left + r.width * X) + 'px');
-        // Picture fully off screen: reset so the entrance plays again next time
-        if (r.bottom <= 0 || r.top >= vh) {
-          if (!it.armed) { it.armed = true; b.classList.remove('is-on', 'is-entering'); }
-          return;
-        }
-        if (it.armed) {
-          var seen = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-          if (seen < Math.min(r.height, vh) - 2) return;      // wait until the whole picture is visible
-          it.armed = false;
-          var vTop = Math.max(r.top, 0);
-          it.ay = vTop + (Math.min(r.bottom, vh) - vTop) * Y;   // resting point within the visible picture, fixed on the screen from now on
-          b.style.setProperty('--y', it.ay + 'px');
-          b.classList.remove('is-entering');
-          if (!calm) {
-            var startY = Math.min(r.bottom, vh) - h / 2 - 16;    // just inside the picture's bottom edge
-            b.style.setProperty('--dy', (startY - it.ay) + 'px');
-            void b.offsetWidth;                                 // commit the start position
-            b.classList.add('is-entering');
-          }
-          b.style.setProperty('--dy', '0px');
-          b.classList.add('is-on');
-          settle(it);
-          return;
-        }
-        // Resting: visible only while the picture lies beneath the badge
-        var under = r.top <= it.ay - h / 2 - MARGIN && r.bottom >= it.ay + h / 2 + MARGIN;
-        b.classList.toggle('is-on', under);
       });
     }
+
+    function check() {
+      var vh = window.innerHeight;
+      figs = figs.filter(function (f) {
+        var r = f.getBoundingClientRect();
+        var seen = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+        if (seen < Math.min(r.height, vh) - 2) return true;   // not fully on screen yet: keep watching
+        var b = f.querySelector('.loc-block');
+        b.classList.add('is-on');
+        settle(b.querySelector('.loc-v'));
+        return false;                                          // done: it stays
+      });
+      if (!figs.length) window.removeEventListener('scroll', onScroll);
+    }
     var queued = false;
-    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; update(); }); } }
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; check(); }); } }
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
-    update();
+    check();
   })();
   </script>
 </body>
