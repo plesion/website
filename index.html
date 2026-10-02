@@ -139,7 +139,8 @@
     </div>
 
     <figure class="photo-band">
-      <img src="/assets/photo-city-day.jpg" alt="A man on a cobbled street by a bridge looks at his phone, with posts for live jazz, an outdoor film, a gallery opening and a night market floating at the places where they happen." width="1600" height="900" loading="lazy" decoding="async">
+      <img src="/assets/photo-city-day.jpg" alt="A man on a cobbled street by a bridge looks at his phone, with posts for live jazz, an outdoor film, a gallery opening and a night market floating at the places where they happen. Brooklyn, New York." width="1600" height="900" loading="lazy" decoding="async">
+      <div class="loc-block" aria-hidden="true"><span class="loc-k">Current location</span><span class="loc-v">40°42'11"N 73°59'33"W</span></div>
     </figure>
 
     <section class="text-band">
@@ -150,7 +151,8 @@
     </section>
 
     <figure class="photo-band">
-      <img src="/assets/photo-city-dusk.jpg" alt="At dusk, a woman on a terrace above a city of lights holds her phone, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the view." width="1600" height="900" loading="lazy" decoding="async">
+      <img src="/assets/photo-city-dusk.jpg" alt="At dusk, a woman on a terrace above a city of lights holds her phone, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the view. London, over the Thames and Saint Paul's Cathedral." width="1600" height="900" loading="lazy" decoding="async">
+      <div class="loc-block" aria-hidden="true"><span class="loc-k">Current location</span><span class="loc-v">51°30'27"N 00°05'58"W</span></div>
     </figure>
 
     <section class="text-band">
@@ -192,5 +194,37 @@
       </div>
     </div>
   </footer>
+  <script>
+  // Location block: appears when its picture scrolls into view, then the digits settle like a GPS fix
+  (function () {
+    var blocks = document.querySelectorAll('.loc-block');
+    if (!('IntersectionObserver' in window)) { blocks.forEach(function (b) { b.classList.add('is-on'); }); return; }
+    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    function settle(el) {
+      var target = el.textContent, start = null, dur = 1100;
+      function frame(t) {
+        if (!start) start = t;
+        var p = Math.min((t - start) / dur, 1), fixed = Math.floor(p * target.length), out = '';
+        for (var i = 0; i < target.length; i++) {
+          var c = target[i];
+          out += (i < fixed || !/[0-9]/.test(c)) ? c : String(Math.floor(Math.random() * 10));
+        }
+        el.textContent = out;
+        if (p < 1) requestAnimationFrame(frame);
+      }
+      requestAnimationFrame(frame);
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        var b = e.target.querySelector('.loc-block');
+        io.unobserve(e.target);
+        b.classList.add('is-on');
+        if (!calm) setTimeout(function () { settle(b.querySelector('.loc-v')); }, 250);
+      });
+    }, { threshold: 0.45 });
+    blocks.forEach(function (b) { io.observe(b.parentNode); });
+  })();
+  </script>
 </body>
 </html>
