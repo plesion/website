@@ -459,11 +459,11 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .duo-lock img { width: var(--i); height: auto; }
 .duo-word { display: block; width: calc(var(--i) * 1.35); aspect-ratio: 1800 / 359; height: auto; background: #000; }
 .duo-poster { display: flex; align-items: center; padding: 4vw 3.4vw 4.4vw; background: #0C0E10; color: #F2F0EA; overflow: hidden; }
-.duo-lines { margin: 0; font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.84; }
+.duo-lines { margin: 0; font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.9; }
 .duo-lines .l { display: block; white-space: nowrap; opacity: 0; animation: duo-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
-.duo-lines .l1 { font-size: 15.9vw; animation-delay: 0.2s; }
-.duo-lines .l2 { font-size: 16.8vw; animation-delay: 0.55s; }
-.duo-lines .l3 { font-size: 9.2vw; margin-top: 0.12em; animation-delay: 0.9s; }
+.duo-lines .l1 { font-size: 9.2vw; animation-delay: 0.2s; }
+.duo-lines .l2 { font-size: 9.2vw; animation-delay: 0.55s; }
+.duo-lines .l3 { font-size: 9.2vw; animation-delay: 0.9s; }
 @keyframes duo-in { from { opacity: 0; transform: translateY(0.25em); } to { opacity: 1; transform: none; } }
 .duo-dot { position: relative; display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.04em; border-radius: 50%; background: var(--signal); }
 .duo-dot::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--signal); opacity: 0; animation: duo-ring 2.2s ease-out 1.6s infinite; }
@@ -473,8 +473,8 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .duo-brand { padding: 56px 20px 48px; }
   .duo-lock { --i: 150px; }
   .duo-poster { padding: 30px 16px 34px; }
-  .duo-lines .l1 { font-size: 33vw; }
-  .duo-lines .l2 { font-size: 34.8vw; }
+  .duo-lines .l1 { font-size: 19.2vw; }
+  .duo-lines .l2 { font-size: 19.2vw; }
   .duo-lines .l3 { font-size: 19.2vw; }
 }
 @media (prefers-reduced-motion: reduce) { .duo-lines .l { animation: none; opacity: 1; } .duo-dot::after { animation: none; } }
@@ -593,3 +593,8 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .foot-dl .badge:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
 .foot-dl img { display: block; height: 40px; width: auto; }
 @media (prefers-reduced-motion: reduce) { .foot-dl .badge { transition: none; } .foot-dl .badge:hover { transform: none; } }
+
+/* Brand section on desktop: two squares, logo and poster centred with even space above and below */
+@media (min-width: 601px) {
+  .duo-brand, .duo-poster { aspect-ratio: 1 / 1; padding-top: 0; padding-bottom: 0; }
+}
