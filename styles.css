@@ -561,7 +561,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 
 /* Live strip on desktop: the four words lead each column in poster capitals, the same size as the photo-section titles */
 @media (min-width: 901px) {
-  .ns-cell { min-height: 36vw; padding: 2.6vw 2vw 2.8vw; }
+  .ns-cell { min-height: 40vw; padding: 7vw 2vw 2.8vw; }
   .ns-label { font: 700 4.05vw/0.86 var(--font-title); letter-spacing: -0.03em; gap: 0.25em; align-items: flex-start; }
   .ns-light { width: 0.14em; height: 0.14em; margin-top: 0.1em; order: 2; }
   .ns-read { justify-content: flex-end; padding: 2vw 0 1.2vw; }
