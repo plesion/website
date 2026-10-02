@@ -187,7 +187,7 @@ a:hover { text-decoration-thickness: 2px; }
   justify-content: center;
   min-height: 240px;
   padding: 24px 20px;
-  background: #808080 url(/assets/concrete.jpg) center / cover no-repeat;
+  background: #000000;
 }
 .hero-badges { justify-content: center; gap: 18px; }
 .hero-badges .badge { border-radius: 9px; transition: transform 0.15s ease; }
@@ -220,11 +220,13 @@ a:hover { text-decoration-thickness: 2px; }
   .photo-band img { aspect-ratio: 4 / 3; object-position: right center; }
 }
 .photo-band { position: relative; }
-/* Location block, as in the app's top bar: dark grey, green outline, DMS coordinates */
+/* Location block, as in the app's top bar: dark grey, green outline, DMS coordinates.
+   Centred at the bottom of the picture; fades in with scroll (--p from 0 to 1, set by the script) */
 .loc-block {
+  --p: 1;
   position: absolute;
-  left: clamp(12px, 3vw, 44px);
-  top: clamp(12px, 3vw, 44px);
+  left: 50%;
+  bottom: clamp(12px, 3.2vw, 48px);
   display: grid;
   gap: 2px;
   padding: 0.55em 1.25em 0.6em;
@@ -238,13 +240,13 @@ a:hover { text-decoration-thickness: 2px; }
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.35);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
-  opacity: 0;
-  transform: translateY(12px) scale(0.96);
-  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.2, 0.8, 0.2, 1);
+  opacity: var(--p);
+  transform: translate(-50%, calc((1 - var(--p)) * 24px));
+  will-change: opacity, transform;
 }
-.loc-block.is-on { opacity: 1; transform: none; }
+.js-loc .loc-block { --p: 0; }
 @media (max-width: 640px) { .loc-block { border-width: 1.5px; } }
-@media (prefers-reduced-motion: reduce) { .loc-block { transition: opacity 0.3s ease; transform: none; } }
+@media (prefers-reduced-motion: reduce) { .loc-block { transform: translate(-50%, 0); } }
 .text-band { padding: 88px 0; text-align: center; }
 .text-band h2 { margin: 0 auto 18px; font-size: clamp(1.8rem, 4vw, 2.6rem); line-height: 1; max-width: 20ch; }
 .text-band p { margin: 0 auto; max-width: 46ch; font-size: clamp(1.05rem, 1.6vw, 1.2rem); line-height: 1.6; color: var(--fg-soft); }

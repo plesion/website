@@ -140,7 +140,7 @@
 
     <figure class="photo-band">
       <img src="/assets/photo-city-day.jpg" alt="A man on a cobbled street by a bridge looks at his phone, with posts for live jazz, an outdoor film, a gallery opening and a night market floating at the places where they happen. Brooklyn, New York." width="1600" height="900" loading="lazy" decoding="async">
-      <div class="loc-block" aria-hidden="true"><span class="loc-k">Current location</span><span class="loc-v">40°42'11"N 73°59'33"W</span></div>
+      <div class="loc-block" aria-hidden="true"><span class="loc-k">Your current location</span><span class="loc-v">40°42'11"N 73°59'33"W</span></div>
     </figure>
 
     <section class="text-band">
@@ -152,7 +152,7 @@
 
     <figure class="photo-band">
       <img src="/assets/photo-city-dusk.jpg" alt="At dusk, a woman on a terrace above a city of lights holds her phone, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the view. London, over the Thames and Saint Paul's Cathedral." width="1600" height="900" loading="lazy" decoding="async">
-      <div class="loc-block" aria-hidden="true"><span class="loc-k">Current location</span><span class="loc-v">51°30'27"N 00°05'58"W</span></div>
+      <div class="loc-block" aria-hidden="true"><span class="loc-k">Your current location</span><span class="loc-v">51°30'27"N 00°05'58"W</span></div>
     </figure>
 
     <section class="text-band">
@@ -195,35 +195,39 @@
     </div>
   </footer>
   <script>
-  // Location block: appears when its picture scrolls into view, then the digits settle like a GPS fix
+  // Location block: fades in as its picture scrolls up into view; the digits settle like a GPS fix
   (function () {
-    var blocks = document.querySelectorAll('.loc-block');
-    if (!('IntersectionObserver' in window)) { blocks.forEach(function (b) { b.classList.add('is-on'); }); return; }
+    var bands = [].slice.call(document.querySelectorAll('.photo-band'));
+    if (!bands.length) return;
+    document.documentElement.classList.add('js-loc');
     var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function settle(el) {
-      var target = el.textContent, start = null, dur = 1100;
-      function frame(t) {
-        if (!start) start = t;
-        var p = Math.min((t - start) / dur, 1), fixed = Math.floor(p * target.length), out = '';
-        for (var i = 0; i < target.length; i++) {
-          var c = target[i];
-          out += (i < fixed || !/[0-9]/.test(c)) ? c : String(Math.floor(Math.random() * 10));
-        }
-        el.textContent = out;
-        if (p < 1) requestAnimationFrame(frame);
-      }
-      requestAnimationFrame(frame);
+    var items = bands.map(function (f) {
+      var b = f.querySelector('.loc-block'), v = b.querySelector('.loc-v');
+      return { f: f, b: b, v: v, target: v.textContent, last: -1 };
+    });
+    function scramble(t, fixed) {
+      var out = '';
+      for (var i = 0; i < t.length; i++) out += (i < fixed || !/[0-9]/.test(t[i])) ? t[i] : String(Math.floor(Math.random() * 10));
+      return out;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (!e.isIntersecting) return;
-        var b = e.target.querySelector('.loc-block');
-        io.unobserve(e.target);
-        b.classList.add('is-on');
-        if (!calm) setTimeout(function () { settle(b.querySelector('.loc-v')); }, 250);
+    function update() {
+      var vh = window.innerHeight;
+      items.forEach(function (it) {
+        var r = it.f.getBoundingClientRect();
+        // 0 when the bottom of the picture reaches the bottom of the screen, 1 once it has risen by a third of the screen
+        var p = Math.max(0, Math.min(1, (vh - r.bottom) / (vh * 0.33)));
+        p = Math.round(p * 100) / 100;
+        if (p === it.last) return;
+        it.last = p;
+        it.b.style.setProperty('--p', p);
+        it.v.textContent = (calm || p >= 1) ? it.target : scramble(it.target, Math.floor(p * it.target.length));
       });
-    }, { threshold: 0.45 });
-    blocks.forEach(function (b) { io.observe(b.parentNode); });
+    }
+    var queued = false;
+    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; update(); }); } }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    update();
   })();
   </script>
 </body>
