@@ -423,29 +423,33 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   color: var(--fg);
 }
 
-/* "The live layer": opening section, dark panel beside the London photo.
-   Its own fonts: Inter Tight (headline), Inter (text, buttons), IBM Plex Mono (label, coordinates).
-   Sizes follow the reference at 1600 px wide (1vw = 16 px there). */
-.live { display: grid; grid-template-columns: 41.75% 58.25%; min-height: 44vw; background: #0C0E10; color: #F2F0EA; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
-.live-text { display: flex; flex-direction: column; align-items: flex-start; padding: 4.9vw 4.4vw 4vw; }
-.live-eyebrow { margin: 0 0 1.55vw; font: 400 max(9px, 0.58vw)/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: 0.15em; text-transform: uppercase; color: #8E8E8E; }
-.live-title { margin: 0 0 1.35vw; font: 600 5.05vw/0.92 "Inter Tight", Inter, system-ui, sans-serif; letter-spacing: -0.022em; color: #F2F0EA; }
+/* "The live layer": opening section. The London photo runs edge to edge (16:9);
+   the text sits in a solid band, 26% wide, running top to bottom from 17% of the width.
+   Its own fonts: Inter Tight (headline), Inter (text, buttons), IBM Plex Mono (label, coordinates). */
+.live { position: relative; overflow: hidden; display: flex; align-items: stretch; min-height: 56.25vw; padding-left: 17vw; background: #0C0E10; color: #F2F0EA; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
+.live-text { position: relative; z-index: 1; width: 26vw; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4vw 2.6vw; background: #0C0E10; box-shadow: 0 0 60px rgba(0, 0, 0, 0.35); }
+.live-eyebrow { margin: 0 0 1.55vw; font: 400 max(9px, 0.58vw)/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: 0.15em; text-transform: uppercase; color: #9A9A9A; }
+.live-title { margin: 0 0 1.35vw; font: 600 4.8vw/0.92 "Inter Tight", Inter, system-ui, sans-serif; letter-spacing: -0.022em; color: #F2F0EA; }
 .live-title span { display: block; }
-.live-lede { margin: 0 0 1.9vw; max-width: max(21.5vw, 30ch); font-size: max(14px, 0.97vw); line-height: 1.5; color: #CFCFCF; }
-.live-ctas { display: flex; flex-wrap: wrap; gap: max(8px, 0.6vw); }
-.live-cta { display: inline-block; padding: max(10px, 0.82vw) max(12px, 1vw); background: #F2F0EA; color: #0C0E10; font-weight: 600; font-size: max(12px, 0.72vw); line-height: 1; text-decoration: none; border-radius: 1px; transition: transform 0.15s ease; }
+.live-lede { margin: 0 0 1.9vw; font-size: max(14px, 0.97vw); line-height: 1.5; color: #D6D6D6; }
+/* Two buttons of equal width: side by side when they fit, stacked otherwise */
+.live-ctas { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: max(8px, 0.6vw); }
+.live-cta { display: block; padding: max(10px, 0.82vw) max(12px, 1vw); background: #F2F0EA; color: #0C0E10; font-weight: 600; font-size: max(12px, 0.72vw); line-height: 1; text-align: center; text-decoration: none; border-radius: 1px; transition: transform 0.15s ease; }
 .live-cta:hover { transform: translateY(-2px); }
 .live-cta:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
-.live-photo { position: relative; background: #1a1a1a url(/assets/photo-city-dusk.jpg) 49% 55% / cover no-repeat; }
-.live-chip { position: absolute; left: 1.3vw; bottom: 0.75vw; display: grid; grid-template-columns: auto auto; gap: 0.55vw 1.1vw; padding: 0.8vw; background: rgba(12, 14, 16, 0.86); border: 1px solid rgba(255, 255, 255, 0.10); font: 400 max(9px, 0.56vw)/1 "IBM Plex Mono", ui-monospace, monospace; color: #E6E4DE; }
+.live-photo { position: absolute; inset: 0; background: #1a1a1a url(/assets/photo-city-dusk.jpg) center / cover no-repeat; }
+.live-chip { position: absolute; left: calc(43vw + 1.3vw); bottom: 0.75vw; display: grid; grid-template-columns: auto auto; gap: 0.55vw 1.1vw; padding: 0.8vw; background: rgba(12, 14, 16, 0.86); border: 1px solid rgba(255, 255, 255, 0.10); font: 400 max(9px, 0.56vw)/1 "IBM Plex Mono", ui-monospace, monospace; color: #E6E4DE; }
+@media (min-width: 901px) and (max-width: 1279px) {
+  .live-ctas { grid-auto-flow: row; align-self: stretch; }
+}
 @media (max-width: 900px) {
-  .live { grid-template-columns: 1fr; min-height: 0; }
-  .live-text { padding: 52px 22px 44px; }
+  .live { display: block; min-height: 0; padding-left: 0; }
+  .live-text { width: auto; padding: 52px 22px 44px; box-shadow: none; }
   .live-eyebrow { font-size: 10px; margin-bottom: 18px; }
   .live-title { font-size: clamp(44px, 14vw, 72px); margin-bottom: 20px; }
   .live-lede { max-width: 34ch; font-size: 15px; margin-bottom: 24px; }
   .live-cta { font-size: 13px; padding: 12px 15px; }
-  .live-photo { aspect-ratio: 4 / 5; background-position: 72% center; }
+  .live-photo { position: relative; inset: auto; aspect-ratio: 4 / 5; background-position: 72% center; }
   .live-chip { left: 12px; bottom: 12px; gap: 7px 20px; padding: 11px 12px; font-size: 10px; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .live-photo { aspect-ratio: 3 / 2; } }
