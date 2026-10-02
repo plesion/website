@@ -132,6 +132,7 @@
     </section>
 
     <div class="hero-tray">
+      <p class="tray-line">Discover the best of what's happening nearby, and live it.</p>
       <div class="badges hero-badges">
         <a class="badge" href="https://apps.apple.com/us/app/plesion-here-now/id1502237943"><img src="/assets/badge-app-store.svg" alt="Download on the App Store" width="168" height="56"></a>
         <a class="badge" href="https://play.google.com/store/apps/details?id=com.vantino.plesion"><img src="/assets/badge-google-play.svg" alt="Get it on Google Play" width="189" height="56"></a>
@@ -140,30 +141,39 @@
 
     <figure class="photo-band">
       <img src="/assets/photo-city-day.jpg" alt="A man on a cobbled street by a bridge looks at his phone, with posts for live jazz, an outdoor film, a gallery opening and a night market floating at the places where they happen. Brooklyn, New York." width="1600" height="900" loading="lazy" decoding="async">
-      <div class="loc-block" aria-hidden="true"><span class="loc-k">Your current location</span><span class="loc-v">40°42'11"N 73°59'33"W</span></div>
     </figure>
 
     <section class="text-band">
       <div class="wrap">
-        <h2>Posts pinned to real places</h2>
-        <p>PLESION posts are pinned to an exact spot, like real posters. See what's happening a few steps away, and share what's happening where you are.</p>
+        <h2>You're already here. Look.</h2>
+        <p>The best moments are the ones you didn't look for, and PLESION reveals them to you.</p>
       </div>
     </section>
 
     <figure class="photo-band">
       <img src="/assets/photo-city-dusk.jpg" alt="At dusk, a woman on a terrace above a city of lights holds her phone, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the view. London, over the Thames and Saint Paul's Cathedral." width="1600" height="900" loading="lazy" decoding="async">
-      <div class="loc-block" aria-hidden="true"><span class="loc-k">Your current location</span><span class="loc-v">51°30'27"N 00°05'58"W</span></div>
     </figure>
 
     <section class="text-band">
       <div class="wrap">
-        <h2>Local. Live. Real.</h2>
-        <p>A band is playing great music? Your game needs more players? Share a post, and the people around you can walk over and join in.</p>
+        <h2>See what's on around you.</h2>
+        <p>Everything nearby, from near to far.</p>
       </div>
     </section>
 
-    <section class="hero-tray get-tray" id="download" aria-label="Download PLESION">
-      <p class="get-line"><span>Join real life.</span> <span>Around you.</span> <span>Here.</span> <span>Now.</span></p>
+    <figure class="photo-band">
+      <img src="/assets/photo-city-turin.jpg" alt="An older man on a hillside above Turin holds his phone at sunset, the Mole Antonelliana, the river Po and the Alps before him, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the city." width="1600" height="900" loading="lazy" decoding="async">
+    </figure>
+
+    <section class="text-band">
+      <div class="wrap">
+        <h2>More lived time. Less screen time.</h2>
+        <p>Escape the endless scroll. PLESION brings you back to where you are.</p>
+      </div>
+    </section>
+
+    <section class="hero-tray get-tray" id="download">
+      <p class="tray-line">See what's happening around you, right now.</p>
       <div class="badges hero-badges">
         <a class="badge" href="https://apps.apple.com/us/app/plesion-here-now/id1502237943"><img src="/assets/badge-app-store.svg" alt="Download on the App Store" width="168" height="56"></a>
         <a class="badge" href="https://play.google.com/store/apps/details?id=com.vantino.plesion"><img src="/assets/badge-google-play.svg" alt="Get it on Google Play" width="189" height="56"></a>
@@ -202,45 +212,5 @@
       </div>
     </div>
   </footer>
-  <script>
-  // Location block: slides up into its anchor once the whole picture is on screen, then stays there
-  (function () {
-    var figs = [].slice.call(document.querySelectorAll('.photo-band'));
-    if (!figs.length) return;
-    document.documentElement.classList.add('js-loc');
-    var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    function settle(v) {
-      if (calm) return;
-      var t = v.textContent, t0 = null, dur = 700;
-      requestAnimationFrame(function frame(now) {
-        if (!t0) t0 = now;
-        var p = Math.min((now - t0) / dur, 1), fixed = Math.floor(p * t.length), out = '';
-        for (var i = 0; i < t.length; i++) out += (i < fixed || !/[0-9]/.test(t[i])) ? t[i] : String(Math.floor(Math.random() * 10));
-        v.textContent = out;
-        if (p < 1) requestAnimationFrame(frame);
-      });
-    }
-
-    function check() {
-      var vh = window.innerHeight;
-      figs = figs.filter(function (f) {
-        var r = f.getBoundingClientRect();
-        var seen = Math.min(r.bottom, vh) - Math.max(r.top, 0);
-        if (seen < Math.min(r.height, vh) - 2) return true;   // not fully on screen yet: keep watching
-        var b = f.querySelector('.loc-block');
-        b.classList.add('is-on');
-        settle(b.querySelector('.loc-v'));
-        return false;                                          // done: it stays
-      });
-      if (!figs.length) window.removeEventListener('scroll', onScroll);
-    }
-    var queued = false;
-    function onScroll() { if (!queued) { queued = true; requestAnimationFrame(function () { queued = false; check(); }); } }
-    window.addEventListener('scroll', onScroll, { passive: true });
-    window.addEventListener('resize', onScroll);
-    check();
-  })();
-  </script>
 </body>
 </html>
