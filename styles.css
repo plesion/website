@@ -454,3 +454,33 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 }
 @media (min-width: 601px) and (max-width: 900px) { .live-photo { aspect-ratio: 3 / 2; } }
 @media (prefers-reduced-motion: reduce) { .live-cta { transition: none; } .live-cta:hover { transform: none; } }
+
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+/* Brand section: the app icon and handwritten name on white, beside "HERE. NOW. FOR YOU." on black.
+   Each poster line is sized to fill its half exactly (Inter Tight Bold); the last full stop is the blue live dot. */
+.duo { display: grid; grid-template-columns: 1fr 1fr; }
+.duo-brand { display: grid; place-items: center; padding: 4vw; background: #FFFFFF; }
+.duo-lock { --i: min(15vw, 240px); margin: 0; display: flex; flex-direction: column; align-items: center; gap: calc(var(--i) * 0.12); }
+.duo-lock img { width: var(--i); height: auto; }
+.duo-word { display: block; width: calc(var(--i) * 1.35); aspect-ratio: 1800 / 359; height: auto; background: #000; }
+.duo-poster { display: flex; align-items: center; padding: 4vw 3.4vw 4.4vw; background: #0C0E10; color: #F2F0EA; }
+.duo-lines { margin: 0; font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: -0.03em; line-height: 0.84; }
+.duo-lines .l { display: block; white-space: nowrap; opacity: 0; animation: duo-in 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards; }
+.duo-lines .l1 { font-size: 15.9vw; animation-delay: 0.2s; }
+.duo-lines .l2 { font-size: 16.8vw; animation-delay: 0.55s; }
+.duo-lines .l3 { font-size: 9.85vw; margin-top: 0.12em; animation-delay: 0.9s; }
+@keyframes duo-in { from { opacity: 0; transform: translateY(0.25em); } to { opacity: 1; transform: none; } }
+.duo-dot { position: relative; display: inline-block; width: 0.2em; height: 0.2em; margin-left: 0.04em; border-radius: 50%; background: var(--signal); }
+.duo-dot::after { content: ""; position: absolute; inset: -2px; border-radius: 50%; border: 2px solid var(--signal); opacity: 0; animation: duo-ring 2.2s ease-out 1.6s infinite; }
+@keyframes duo-ring { from { transform: scale(1); opacity: 0.8; } to { transform: scale(3); opacity: 0; } }
+@media (max-width: 600px) {
+  .duo { grid-template-columns: 1fr; }
+  .duo-brand { padding: 56px 20px 48px; }
+  .duo-lock { --i: 150px; }
+  .duo-poster { padding: 30px 16px 34px; }
+  .duo-lines .l1 { font-size: 33vw; }
+  .duo-lines .l2 { font-size: 34.8vw; }
+  .duo-lines .l3 { font-size: 20.5vw; }
+}
+@media (prefers-reduced-motion: reduce) { .duo-lines .l { animation: none; opacity: 1; } .duo-dot::after { animation: none; } }
