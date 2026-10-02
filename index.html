@@ -16,8 +16,8 @@
   <meta property="og:image" content="https://plesion.com/assets/logo-512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20261002-2">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Inter:wght@400;600&family=Inter+Tight:wght@600&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/styles.css?v=20261002-3">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -118,6 +118,21 @@
   <a class="skip" href="#main">Skip to content</a>
 
   <main id="main">
+    <section class="live" aria-labelledby="live-title">
+      <div class="live-text">
+        <p class="live-eyebrow">The live layer</p>
+        <h2 id="live-title" class="live-title"><span>See</span> <span>what's</span> <span>alive</span> <span>around</span> <span>you.</span></h2>
+        <p class="live-lede">The city was already full of possibilities. PLESION makes the live layer visible while it still matters.</p>
+        <div class="live-ctas">
+          <a class="live-cta" href="https://apps.apple.com/us/app/plesion-here-now/id1502237943">PLESION iOS</a>
+          <a class="live-cta" href="https://play.google.com/store/apps/details?id=com.vantino.plesion">PLESION Android</a>
+        </div>
+      </div>
+      <div class="live-photo" role="img" aria-label="At dusk, a woman on a terrace above a city of lights holds her phone, with posts for live jazz, an outdoor film and a night market pinned across the view.">
+        <div class="live-chip" aria-hidden="true"><span>51°30'27"N</span><span>00°05'58"W</span><span class="live-date"></span><span>NOW</span></div>
+      </div>
+    </section>
+
     <section class="hero">
       <div class="wrap">
         <h1 class="hero-brand">
@@ -212,5 +227,12 @@
       </div>
     </div>
   </footer>
+  <script>
+    // Live layer: show today's date next to NOW in the coordinates box
+    (function () {
+      var d = new Date(), s = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      var el = document.querySelector('.live-date'); if (el) el.textContent = s;
+    })();
+  </script>
 </body>
 </html>
