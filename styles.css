@@ -434,29 +434,20 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live-title span { display: block; }
 .live-lede { margin: 0 0 1.9vw; font-size: max(14px, 0.97vw); line-height: 1.5; color: #D6D6D6; }
 /* Two buttons of equal width: side by side when they fit, stacked otherwise */
-.live-ctas { display: inline-grid; grid-auto-flow: column; grid-auto-columns: 1fr; gap: max(8px, 0.6vw); }
-.live-cta { display: block; padding: max(10px, 0.82vw) max(12px, 1vw); background: #F2F0EA; color: #0C0E10; font-weight: 600; font-size: max(12px, 0.72vw); line-height: 1; text-align: center; text-decoration: none; border-radius: 1px; transition: transform 0.15s ease; }
-.live-cta:hover { transform: translateY(-2px); }
-.live-cta:focus-visible { outline: 3px solid var(--signal); outline-offset: 3px; }
 .live-photo { position: absolute; inset: 0; background: #1a1a1a url(/assets/photo-city-dusk.jpg) center / cover no-repeat; }
 .live--brooklyn .live-photo { background-image: url(/assets/photo-city-day.jpg); }
 .live--murals .live-photo { background-image: url(/assets/photo-city-murals.jpg); }
 .live-chip { position: absolute; left: calc(43vw + 1.3vw); bottom: 0.75vw; display: grid; grid-template-columns: auto auto; gap: 0.55vw 1.1vw; padding: 0.8vw; background: rgba(12, 14, 16, 0.86); border: 1px solid rgba(255, 255, 255, 0.10); font: 400 max(9px, 0.56vw)/1 "IBM Plex Mono", ui-monospace, monospace; color: #E6E4DE; }
-@media (min-width: 901px) and (max-width: 1279px) {
-  .live-ctas { grid-auto-flow: row; align-self: stretch; }
-}
 @media (max-width: 900px) {
   .live { display: block; min-height: 0; padding-left: 0; }
   .live-text { width: auto; padding: 52px 22px 44px; box-shadow: none; }
   .live-eyebrow { font-size: 10px; margin-bottom: 18px; }
   .live-title { font-size: clamp(44px, 14vw, 72px); margin-bottom: 20px; }
   .live-lede { max-width: 34ch; font-size: 15px; margin-bottom: 24px; }
-  .live-cta { font-size: 13px; padding: 12px 15px; }
   .live-photo { position: relative; inset: auto; aspect-ratio: 4 / 5; background-position: 72% center; }
   .live-chip { left: 12px; bottom: 12px; gap: 7px 20px; padding: 11px 12px; font-size: 10px; }
 }
 @media (min-width: 601px) and (max-width: 900px) { .live-photo { aspect-ratio: 3 / 2; } }
-@media (prefers-reduced-motion: reduce) { .live-cta { transition: none; } .live-cta:hover { transform: none; } }
 
 .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 
@@ -495,10 +486,8 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .text-band p, .tray-line { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: clamp(0.95rem, 1.25vw, 1.15rem); line-height: 1.5; letter-spacing: -0.01em; }
 .live-lede { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: max(13px, 0.88vw); letter-spacing: -0.01em; }
 
-/* Photo-band buttons: smaller, at the bottom of the text column; the text stays centred above them */
-.live-cta { font-size: max(11px, 0.62vw); padding: max(8px, 0.6vw) max(10px, 0.8vw); }
 .live-eyebrow { margin-top: auto; }
-.live-ctas { margin-top: auto; }
+.live-text > .live-lede:last-child { margin-bottom: auto; }
 @media (max-width: 900px) { .live-lede { font-size: 14px; } }
 
 /* Footer in IBM Plex Mono, like the sentences */
@@ -541,22 +530,22 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 }
 @media (prefers-reduced-motion: reduce) { .ns-light, .ns-radar i { animation: none; } .ns-radar i { opacity: 0.5; } }
 
-/* Download buttons, one discreet style per photo section */
-.btn-ghost .live-cta, .btn-link .live-cta, .btn-pill .live-cta { background: transparent; font: 400 max(11px, 0.72vw)/1 var(--font-data); letter-spacing: 0.02em; }
-.btn-ghost .live-cta:hover, .btn-link .live-cta:hover, .btn-pill .live-cta:hover { transform: none; }
-/* London: soft outline */
-.btn-ghost .live-cta { color: #E6E4DE; border: 1px solid rgba(242, 240, 234, 0.32); }
-.btn-ghost .live-cta:hover { color: #FFFFFF; border-color: #F2F0EA; }
-/* Brooklyn: text links */
-.btn-link .live-ctas { grid-auto-columns: auto; gap: max(16px, 1.5vw); }
-.btn-link .live-cta { padding: 4px 0; color: #F2F0EA; text-align: left; border-radius: 0; border-bottom: 1px solid rgba(242, 240, 234, 0.4); }
-.btn-link .live-cta::after { content: " \2197"; }
-.btn-link .live-cta:hover { border-bottom-color: #F2F0EA; }
-/* Teenager: outline pill */
-.btn-pill .live-cta { padding: max(8px, 0.6vw) max(12px, 0.95vw); color: #F2F0EA; border: 1px solid rgba(242, 240, 234, 0.55); border-radius: 999px; }
-.btn-pill .live-cta:hover { background: #F2F0EA; color: #0C0E10; border-color: #F2F0EA; }
-@media (min-width: 901px) and (max-width: 1279px) { .btn-link .live-ctas { align-self: flex-start; justify-items: start; row-gap: 12px; } }
-@media (max-width: 900px) {
-  .btn-ghost .live-cta, .btn-link .live-cta, .btn-pill .live-cta { font-size: 12px; }
-  .btn-ghost .live-cta, .btn-pill .live-cta { padding: 11px 14px; }
 }
+
+/* Opening section: handwritten name at the top of the band */
+.live-brand { margin-bottom: max(24px, 2vw); color: #F2F0EA; }
+.live-brand .brand-word { height: 24px; width: auto; }
+@media (max-width: 900px) { .live-brand { margin-bottom: 30px; } }
+
+/* Opening section: download area at the foot of the band.
+   The app icon and the two buttons share one off-white, one 1 px stroke, one corner radius and one height:
+   icon + "PLESION iOS" on the first line, "PLESION Android" under it. */
+.live-dl { --s: max(30px, 2.1vw); --c: #E6E4DE; margin-top: auto; display: grid; grid-template-columns: auto max-content; gap: max(8px, 0.6vw); align-items: center; }
+.live-dl-icon { grid-column: 1; grid-row: 1; width: calc(var(--s) * 1248 / 1168); height: auto; margin: calc(var(--s) * -40 / 1168); overflow: visible; }
+.live-dl-icon path[fill="#fff"] { fill: var(--c); }
+.live-dl-icon .icon-stroke { fill: none; stroke: var(--c); stroke-width: 1px; vector-effect: non-scaling-stroke; }
+.live-cta { grid-column: 2; display: flex; align-items: center; justify-content: center; height: var(--s); padding: 0 max(10px, 0.8vw); color: var(--c); border: 1px solid var(--c); border-radius: calc(var(--s) * 0.227); font: 400 max(11px, 0.72vw)/1 var(--font-data); letter-spacing: 0.02em; white-space: nowrap; text-decoration: none; transition: background 0.15s ease, color 0.15s ease; }
+.live-cta:hover { background: var(--c); color: #0C0E10; }
+.live-cta:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+@media (max-width: 900px) { .live-dl { --s: 38px; } .live-cta { font-size: 12px; } }
+@media (prefers-reduced-motion: reduce) { .live-cta { transition: none; } }
