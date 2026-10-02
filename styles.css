@@ -504,3 +504,39 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 /* Footer in IBM Plex Mono, like the sentences */
 .site-footer, .site-footer .footer-tag, .site-footer .footer-base { font-family: "IBM Plex Mono", ui-monospace, monospace; }
 .site-footer .footer-tag, .site-footer .footer-social ul { font-size: 1rem; letter-spacing: -0.01em; }
+
+/* "Here / Now / For me / Nearby": four live readouts in a strip */
+.now-strip { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); background: #0C0E10; color: #F2F0EA; border-top: 1px solid rgba(242, 240, 234, 0.12); }
+.ns-cell { display: flex; flex-direction: column; min-height: 20vw; padding: 2vw 1.6vw 2.2vw; border-left: 1px solid rgba(242, 240, 234, 0.12); }
+.ns-cell:first-child { border-left: 0; }
+.ns-label { margin: 0; display: flex; align-items: center; gap: 0.7em; font: 400 max(10px, 0.72vw)/1 var(--font-data); letter-spacing: 0.14em; text-transform: uppercase; }
+.ns-light { width: 0.6em; height: 0.6em; border-radius: 50%; background: #3DDC6E; box-shadow: 0 0 8px #3DDC6E; animation: ns-blink 1.6s ease-in-out infinite; }
+@keyframes ns-blink { 50% { opacity: 0.3; } }
+.ns-read { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.6vw; padding: 1.6vw 0; }
+.ns-val { font: 700 2.6vw/1 var(--font-title); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
+.ns-clock { font-size: 3.6vw; }
+.ns-small { font-size: 2.2vw; }
+.ns-sub { font: 400 max(10px, 0.75vw)/1 var(--font-data); letter-spacing: 0.06em; color: #8E8E8E; }
+.ns-tags { display: flex; flex-wrap: wrap; gap: 0.5vw; }
+.ns-tags span { font: 400 max(11px, 0.85vw)/1 var(--font-data); padding: max(5px, 0.5vw) max(7px, 0.8vw); border: 1px solid rgba(242, 240, 234, 0.35); border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; }
+.ns-tags span:first-child { background: #F2F0EA; color: #0C0E10; border-color: #F2F0EA; }
+.ns-radar { position: relative; width: 4.6vw; aspect-ratio: 1; margin-bottom: 0.4vw; }
+.ns-radar b { position: absolute; inset: 42%; border-radius: 50%; background: var(--signal); }
+.ns-radar i { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(46, 85, 245, 0.9); opacity: 0; animation: ns-radar 3s ease-out infinite; }
+.ns-radar i:nth-child(2) { animation-delay: 1s; }
+.ns-radar i:nth-child(3) { animation-delay: 2s; }
+@keyframes ns-radar { from { transform: scale(0.2); opacity: 1; } to { transform: scale(1); opacity: 0; } }
+.ns-desc { margin: 0; max-width: 26ch; font: 400 max(13px, 0.95vw)/1.5 var(--font-data); letter-spacing: -0.01em; color: #B5B5B5; }
+@media (max-width: 600px) {
+  .now-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .ns-cell { min-height: 180px; padding: 18px 14px 20px; border-top: 1px solid rgba(242, 240, 234, 0.12); }
+  .ns-cell:nth-child(odd) { border-left: 0; }
+  .ns-cell:nth-child(-n+2) { border-top: 0; }
+  .ns-label { font-size: 10px; }
+  .ns-val { font-size: 5.4vw; }
+  .ns-clock { font-size: 7.4vw; }
+  .ns-small { font-size: 5vw; }
+  .ns-radar { width: 12vw; }
+  .ns-tags span { padding: 5px 7px; font-size: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .ns-light, .ns-radar i { animation: none; } .ns-radar i { opacity: 0.5; } }

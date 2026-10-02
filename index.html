@@ -17,7 +17,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Inter+Tight:wght@600;700&family=IBM+Plex+Mono:wght@400&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/styles.css?v=20261002-10">
+  <link rel="stylesheet" href="/styles.css?v=20261002-11">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -133,15 +133,26 @@
       </div>
     </section>
 
-    <section class="duo" aria-label="PLESION: here, now, for you">
-      <div class="duo-brand">
-        <h1 class="duo-lock">
-          <img src="/assets/logo-app.svg" alt="" width="240" height="240">
-          <span class="brand-word duo-word" role="img" aria-label="PLESION"></span>
-        </h1>
+    <section class="now-strip" aria-label="Here, now, for me, nearby">
+      <div class="ns-cell">
+        <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>Here</p>
+        <div class="ns-read"><span class="ns-val">51°30'27"N<br>00°05'58"W</span></div>
+        <p class="ns-desc">Where you actually are.</p>
       </div>
-      <div class="duo-poster">
-        <p class="duo-lines"><span class="l l1">Here.</span> <span class="l l2">Now.</span> <span class="l l3">For you<span class="duo-dot" aria-hidden="true"></span><span class="sr-only">.</span></span></p>
+      <div class="ns-cell">
+        <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>Now</p>
+        <div class="ns-read"><span class="ns-val ns-clock">--:--:--</span><span class="ns-sub live-date"></span></div>
+        <p class="ns-desc">When something is actionable.</p>
+      </div>
+      <div class="ns-cell">
+        <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>For me</p>
+        <div class="ns-read"><span class="ns-tags"><span>Jazz</span><span>Electro</span><span>Rock</span></span></div>
+        <p class="ns-desc">What makes it relevant.</p>
+      </div>
+      <div class="ns-cell">
+        <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>Nearby</p>
+        <div class="ns-read"><span class="ns-radar" aria-hidden="true"><i></i><i></i><i></i><b></b></span><span class="ns-val ns-small">800 m</span></div>
+        <p class="ns-desc">Ranked from near to far.</p>
       </div>
     </section>
 
@@ -161,6 +172,18 @@
     </section>
 
 
+    <section class="duo" aria-label="PLESION: here, now, for you">
+      <div class="duo-brand">
+        <h1 class="duo-lock">
+          <img src="/assets/logo-app.svg" alt="" width="240" height="240">
+          <span class="brand-word duo-word" role="img" aria-label="PLESION"></span>
+        </h1>
+      </div>
+      <div class="duo-poster">
+        <p class="duo-lines"><span class="l l1">Here.</span> <span class="l l2">Now.</span> <span class="l l3">For you<span class="duo-dot" aria-hidden="true"></span><span class="sr-only">.</span></span></p>
+      </div>
+    </section>
+
     <section class="live live--murals" aria-labelledby="lived-title">
       <div class="live-text">
         <p class="live-eyebrow">Physical relevance</p>
@@ -176,13 +199,6 @@
       </div>
     </section>
 
-    <section class="hero-tray get-tray" id="download">
-      <p class="tray-line">Go where it's happening, right now.</p>
-      <div class="badges hero-badges">
-        <a class="badge" href="https://apps.apple.com/us/app/plesion-here-now/id1502237943"><img src="/assets/badge-app-store.svg" alt="Download on the App Store" width="168" height="56"></a>
-        <a class="badge" href="https://play.google.com/store/apps/details?id=com.vantino.plesion"><img src="/assets/badge-google-play.svg" alt="Get it on Google Play" width="189" height="56"></a>
-      </div>
-    </section>
   </main>
 
   <footer class="site-footer">
@@ -221,6 +237,13 @@
     (function () {
       var d = new Date(), s = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
       document.querySelectorAll('.live-date').forEach(function (el) { el.textContent = s; });
+      // Live clock in the NOW column, in the visitor's own time
+      var clocks = document.querySelectorAll('.ns-clock');
+      function tick() {
+        var n = new Date(), t = [n.getHours(), n.getMinutes(), n.getSeconds()].map(function (x) { return String(x).padStart(2, '0'); }).join(':');
+        clocks.forEach(function (c) { c.textContent = t; });
+      }
+      if (clocks.length) { tick(); setInterval(tick, 1000); }
     })();
   </script>
 </body>
