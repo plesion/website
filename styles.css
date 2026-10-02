@@ -585,3 +585,11 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live-badges img { display: block; height: clamp(36px, 2.7vw, 46px); width: auto; }
 @media (max-width: 900px) { .live-badges img { height: 44px; } }
 @media (prefers-reduced-motion: reduce) { .live-badges .badge { transition: none; } .live-badges .badge:hover { transform: none; } }
+
+/* Footer: official store badges below the social links (unaltered artwork) */
+.foot-dl { display: flex; flex-wrap: wrap; gap: 10px; width: auto; }
+.foot-dl .badge { display: block; border-radius: 8px; transition: transform 0.15s ease; }
+.foot-dl .badge:hover { transform: translateY(-2px); }
+.foot-dl .badge:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.foot-dl img { display: block; height: 40px; width: auto; }
+@media (prefers-reduced-motion: reduce) { .foot-dl .badge { transition: none; } .foot-dl .badge:hover { transform: none; } }
