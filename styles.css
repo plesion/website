@@ -233,11 +233,11 @@ a:hover { text-decoration-thickness: 2px; }
 }
 .photo-band { position: relative; overflow: hidden; }
 /* Location block, as in the app's top bar: dark grey, green outline, DMS coordinates.
-   Anchored slightly left of centre, slightly above the picture's bottom edge, and moves with the picture.
+   Centred, slightly above the picture's bottom edge, and moves with the picture.
    With the script, it slides up into place once the whole picture is on screen, then stays. */
 .loc-block {
   position: absolute;
-  left: 42%;
+  left: 50%;
   bottom: 7%;
   display: grid;
   gap: 2px;
