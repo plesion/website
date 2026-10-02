@@ -429,7 +429,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .live { position: relative; overflow: hidden; display: flex; align-items: stretch; min-height: 56.25vw; padding-left: 17vw; background: #0C0E10; color: #F2F0EA; font-family: Inter, system-ui, -apple-system, "Segoe UI", sans-serif; }
 .live-text { position: relative; z-index: 1; width: 26vw; display: flex; flex-direction: column; justify-content: center; align-items: flex-start; padding: 4vw 2.6vw; background: #0C0E10; box-shadow: 0 0 60px rgba(0, 0, 0, 0.35); }
 .live-eyebrow { margin: 0 0 1.55vw; font: 400 max(9px, 0.58vw)/1 "IBM Plex Mono", ui-monospace, monospace; letter-spacing: 0.15em; text-transform: uppercase; color: #9A9A9A; }
-.live-title { margin: 0 0 1.35vw; font: 600 4.8vw/0.92 "Inter Tight", Inter, system-ui, sans-serif; letter-spacing: -0.022em; color: #F2F0EA; }
+.live-title { margin: 0 0 1.6vw; font: 700 4.05vw/0.86 "Inter Tight", Inter, system-ui, sans-serif; letter-spacing: -0.03em; text-transform: uppercase; color: #F2F0EA; }
 .live-title span { display: block; }
 .live-lede { margin: 0 0 1.9vw; font-size: max(14px, 0.97vw); line-height: 1.5; color: #D6D6D6; }
 /* Two buttons of equal width: side by side when they fit, stacked otherwise */
@@ -485,3 +485,16 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .duo-lines .l3 { font-size: 19.2vw; }
 }
 @media (prefers-reduced-motion: reduce) { .duo-lines .l { animation: none; opacity: 1; } .duo-dot::after { animation: none; } }
+
+/* Section titles in the poster style: Inter Tight Bold, all caps, tight */
+.text-band h2 { font-family: "Inter Tight", Inter, system-ui, sans-serif; font-weight: 700; letter-spacing: -0.03em; line-height: 0.88; }
+
+/* Sentences in IBM Plex Mono, smaller than the earlier Roboto sentences */
+.text-band p, .tray-line { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: clamp(0.95rem, 1.25vw, 1.15rem); line-height: 1.5; letter-spacing: -0.01em; }
+.live-lede { font-family: "IBM Plex Mono", ui-monospace, monospace; font-size: max(13px, 0.88vw); letter-spacing: -0.01em; }
+
+/* Photo-band buttons: smaller, at the bottom of the text column; the text stays centred above them */
+.live-cta { font-size: max(11px, 0.62vw); padding: max(8px, 0.6vw) max(10px, 0.8vw); }
+.live-eyebrow { margin-top: auto; }
+.live-ctas { margin-top: auto; }
+@media (max-width: 900px) { .live-lede { font-size: 14px; } }
