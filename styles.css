@@ -470,7 +470,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .duo { grid-template-columns: minmax(0, 1fr); }
   .duo-brand { padding: 56px 20px 48px; }
   .duo-lock { --i: 150px; }
-  .duo-poster { padding: 30px 16px 34px; }
+  .duo-poster { padding: 64px 16px 64px; }
   .duo-lines .l1 { font-size: 19.2vw; }
   .duo-lines .l2 { font-size: 19.2vw; }
   .duo-lines .l3 { font-size: 19.2vw; }
@@ -609,3 +609,6 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-small { font-size: 2.6vw; }
   .ns-tags { min-height: 2.6vw; align-items: center; }
 }
+
+/* Thin line under the live strip, matching the one above it */
+.now-strip { border-bottom: 1px solid rgba(242, 240, 234, 0.12); }
