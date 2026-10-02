@@ -572,3 +572,16 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-tags span { font-size: max(11px, 0.95vw); padding: 0.55vw 0.9vw; }
   .ns-desc { font-size: max(13px, 1vw); }
 }
+
+/* Opening section: app icon (white stroke on its exact edge) next to the handwritten name, as in the legal pages' header */
+.live-brand { display: flex; align-items: center; gap: 22px; }
+.live-brand-icon { width: calc(40px * 1248 / 1168); height: auto; margin: calc(40px * -40 / 1168); overflow: visible; flex: none; }
+.live-brand-icon .icon-stroke { fill: none; stroke: #fff; stroke-width: 1px; vector-effect: non-scaling-stroke; }
+/* Official store badges at the foot of the opening band (unaltered artwork) */
+.live-badges { margin-top: auto; display: flex; flex-wrap: wrap; gap: 10px; }
+.live-badges .badge { display: block; border-radius: 8px; transition: transform 0.15s ease; }
+.live-badges .badge:hover { transform: translateY(-2px); }
+.live-badges .badge:focus-visible { outline: 2px solid var(--signal); outline-offset: 3px; }
+.live-badges img { display: block; height: clamp(36px, 2.7vw, 46px); width: auto; }
+@media (max-width: 900px) { .live-badges img { height: 44px; } }
+@media (prefers-reduced-motion: reduce) { .live-badges .badge { transition: none; } .live-badges .badge:hover { transform: none; } }
