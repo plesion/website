@@ -516,7 +516,7 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .ns-radar i:nth-child(3) { animation-delay: 2s; }
 @keyframes ns-radar { from { transform: scale(0.2); opacity: 1; } to { transform: scale(1); opacity: 0; } }
 .ns-desc { margin: 0; max-width: 26ch; font: 400 max(13px, 0.95vw)/1.5 var(--font-data); letter-spacing: -0.01em; color: #B5B5B5; }
-@media (max-width: 600px) {
+@media (max-width: 900px) {
   .now-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .ns-cell { min-height: 180px; padding: 18px 14px 20px; border-top: 1px solid rgba(242, 240, 234, 0.12); }
   .ns-cell:nth-child(odd) { border-left: 0; }
@@ -559,10 +559,10 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .site-footer .foot-dl .live-cta { color: var(--c); }
 .site-footer .foot-dl .live-cta:hover { background: var(--c); color: #FFFFFF; text-decoration: none; }
 
-/* Live strip on desktop: the four words lead each column in giant poster capitals */
-@media (min-width: 601px) {
+/* Live strip on desktop: the four words lead each column in poster capitals, the same size as the photo-section titles */
+@media (min-width: 901px) {
   .ns-cell { min-height: 36vw; padding: 2.6vw 2vw 2.8vw; }
-  .ns-label { font: 700 4.4vw/0.86 var(--font-title); letter-spacing: -0.03em; gap: 0.25em; align-items: flex-start; }
+  .ns-label { font: 700 4.05vw/0.86 var(--font-title); letter-spacing: -0.03em; gap: 0.25em; align-items: flex-start; }
   .ns-light { width: 0.14em; height: 0.14em; margin-top: 0.1em; order: 2; }
   .ns-read { justify-content: flex-end; padding: 2vw 0 1.2vw; }
   .ns-val { font-size: 2.6vw; }
