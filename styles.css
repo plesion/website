@@ -540,3 +540,23 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-tags span { padding: 5px 7px; font-size: 10px; }
 }
 @media (prefers-reduced-motion: reduce) { .ns-light, .ns-radar i { animation: none; } .ns-radar i { opacity: 0.5; } }
+
+/* Download buttons, one discreet style per photo section */
+.btn-ghost .live-cta, .btn-link .live-cta, .btn-pill .live-cta { background: transparent; font: 400 max(11px, 0.72vw)/1 var(--font-data); letter-spacing: 0.02em; }
+.btn-ghost .live-cta:hover, .btn-link .live-cta:hover, .btn-pill .live-cta:hover { transform: none; }
+/* London: soft outline */
+.btn-ghost .live-cta { color: #E6E4DE; border: 1px solid rgba(242, 240, 234, 0.32); }
+.btn-ghost .live-cta:hover { color: #FFFFFF; border-color: #F2F0EA; }
+/* Brooklyn: text links */
+.btn-link .live-ctas { grid-auto-columns: auto; gap: max(16px, 1.5vw); }
+.btn-link .live-cta { padding: 4px 0; color: #F2F0EA; text-align: left; border-radius: 0; border-bottom: 1px solid rgba(242, 240, 234, 0.4); }
+.btn-link .live-cta::after { content: " \2197"; }
+.btn-link .live-cta:hover { border-bottom-color: #F2F0EA; }
+/* Teenager: outline pill */
+.btn-pill .live-cta { padding: max(8px, 0.6vw) max(12px, 0.95vw); color: #F2F0EA; border: 1px solid rgba(242, 240, 234, 0.55); border-radius: 999px; }
+.btn-pill .live-cta:hover { background: #F2F0EA; color: #0C0E10; border-color: #F2F0EA; }
+@media (min-width: 901px) and (max-width: 1279px) { .btn-link .live-ctas { align-self: flex-start; justify-items: start; row-gap: 12px; } }
+@media (max-width: 900px) {
+  .btn-ghost .live-cta, .btn-link .live-cta, .btn-pill .live-cta { font-size: 12px; }
+  .btn-ghost .live-cta, .btn-pill .live-cta { padding: 11px 14px; }
+}
