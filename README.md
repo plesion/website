@@ -1,6 +1,8 @@
 # plesion.com
 
-Static website for the PLESION app, hosted on Cloudflare Pages. No build step: every commit to `main` is published as-is.
+Static website for the PLESION app, hosted on GitHub Pages from the `main` branch. No build step: every commit to `main` is published as-is.
+
+The `CNAME` file sets the custom domain (plesion.com). DNS stays in Google Cloud DNS: plesion.com has GitHub's four A records, and www.plesion.com is a CNAME to plesion.github.io (GitHub redirects www to plesion.com).
 
 | File | Page |
 |---|---|
