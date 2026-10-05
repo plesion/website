@@ -28,7 +28,7 @@
       var PACKAGE = 'com.vantino.plesion';
       // Apple only reports campaigns when your provider token is present: App Store Connect > App Analytics > Campaigns
       // (campaign link generator). Paste it between the quotes; until then App Store links carry no campaign.
-      var APPLE_PROVIDER_TOKEN = '';
+      var APPLE_PROVIDER_TOKEN = '123825760';
 
       var ua = navigator.userAgent || '';
 
@@ -60,7 +60,7 @@
       var isIOS = /iPhone|iPad|iPod/.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
       var isAndroid = /Android/i.test(ua);
 
-      var appStore = 'https://apps.apple.com/app/id' + APP_ID +
+      var appStore = 'https://apps.apple.com/app/apple-store/id' + APP_ID +
         (APPLE_PROVIDER_TOKEN ? '?pt=' + APPLE_PROVIDER_TOKEN + '&ct=' + encodeURIComponent(src) + '&mt=8' : '');
       var referrer = encodeURIComponent('utm_source=' + src + '&utm_medium=' + medium + '&utm_campaign=download');
       var playWeb = 'https://play.google.com/store/apps/details?id=' + PACKAGE + '&referrer=' + referrer;
