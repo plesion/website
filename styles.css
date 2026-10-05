@@ -507,20 +507,13 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 .ns-label { margin: 0; display: flex; align-items: center; gap: 0.7em; font: 400 max(10px, 0.72vw)/1 var(--font-data); letter-spacing: 0.14em; text-transform: uppercase; }
 .ns-light { width: 0.6em; height: 0.6em; border-radius: 50%; background: #3DDC6E; box-shadow: 0 0 8px #3DDC6E; animation: ns-blink 1.6s ease-in-out infinite; }
 @keyframes ns-blink { 50% { opacity: 0.3; } }
-.ns-read { flex: 1; display: flex; flex-direction: column; justify-content: center; gap: 0.6vw; padding: 1.6vw 0; }
-.ns-val { font: 700 2.6vw/1 var(--font-title); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; }
-.ns-clock { font-size: 3.6vw; }
-.ns-small { font-size: 2.2vw; }
-.ns-sub { font: 400 max(10px, 0.75vw)/1 var(--font-data); letter-spacing: 0.06em; color: #8E8E8E; }
+.ns-read { flex: 1; display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 0; padding: 1.6vw 0; }
+/* Readouts: main values in title type, all the same size; light lines in the same mono type as the FOR ME pills */
+.ns-val { display: block; font: 700 2.6vw/1.05 var(--font-title); letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.ns-lite { display: block; margin-top: 0.9vw; font: 400 max(11px, 0.95vw)/1 var(--font-data); letter-spacing: 0.06em; text-transform: uppercase; color: #F2F0EA; white-space: nowrap; }
 .ns-tags { display: flex; flex-wrap: wrap; gap: 0.5vw; }
 .ns-tags span { font: 400 max(11px, 0.85vw)/1 var(--font-data); padding: max(5px, 0.5vw) max(7px, 0.8vw); border: 1px solid rgba(242, 240, 234, 0.35); border-radius: 999px; text-transform: uppercase; letter-spacing: 0.06em; }
 .ns-tags span:first-child { background: #F2F0EA; color: #0C0E10; border-color: #F2F0EA; }
-.ns-radar { position: relative; width: 4.6vw; aspect-ratio: 1; margin-bottom: 0.4vw; }
-.ns-radar b { position: absolute; inset: 42%; border-radius: 50%; background: var(--signal); }
-.ns-radar i { position: absolute; inset: 0; border-radius: 50%; border: 1px solid rgba(46, 85, 245, 0.9); opacity: 0; animation: ns-radar 3s ease-out infinite; }
-.ns-radar i:nth-child(2) { animation-delay: 1s; }
-.ns-radar i:nth-child(3) { animation-delay: 2s; }
-@keyframes ns-radar { from { transform: scale(0.2); opacity: 1; } to { transform: scale(1); opacity: 0; } }
 .ns-desc { margin: 0; max-width: 26ch; font: 400 max(13px, 0.95vw)/1.5 var(--font-data); letter-spacing: -0.01em; color: #B5B5B5; }
 @media (max-width: 900px) {
   .now-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -528,13 +521,12 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-cell:nth-child(odd) { border-left: 0; }
   .ns-cell:nth-child(-n+2) { border-top: 0; }
   .ns-label { font-size: 10px; }
-  .ns-val { font-size: 5.4vw; }
-  .ns-clock { font-size: 7.4vw; }
-  .ns-small { font-size: 5vw; }
-  .ns-radar { width: 12vw; }
   .ns-tags span { padding: 5px 7px; font-size: 10px; }
+  .ns-val { font-size: 5.2vw; }
+  .ns-lite { margin-top: 8px; font-size: 10px; }
+  .ns-read { justify-content: flex-start; }
 }
-@media (prefers-reduced-motion: reduce) { .ns-light, .ns-radar i { animation: none; } .ns-radar i { opacity: 0.5; } }
+@media (prefers-reduced-motion: reduce) { .ns-light { animation: none; } }
 
 }
 
@@ -571,10 +563,6 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-label { font: 700 4.05vw/0.86 var(--font-title); letter-spacing: -0.03em; gap: 0.25em; align-items: flex-start; }
   .ns-light { width: 0.14em; height: 0.14em; margin-top: 0.1em; order: 2; }
   .ns-read { justify-content: flex-end; padding: 2vw 0 1.2vw; }
-  .ns-val { font-size: 2.6vw; }
-  .ns-clock { font-size: 4.2vw; }
-  .ns-small { font-size: 2.6vw; }
-  .ns-radar { width: 5.6vw; }
   .ns-tags span { font-size: max(11px, 0.95vw); padding: 0.55vw 0.9vw; }
   .ns-desc { font-size: max(13px, 1vw); }
 }
@@ -610,11 +598,6 @@ body.light .site-footer { border-top: 1px solid var(--line); }
   .ns-cell { position: relative; }
   .ns-read { position: absolute; top: calc(50% + 1.2vw); left: 2vw; right: 2vw; justify-content: flex-start; padding: 0; }
   .ns-desc { margin-top: auto; }
-  .ns-cell:last-child .ns-read { flex-direction: row; align-items: center; justify-content: flex-start; gap: 1vw; }
-  .ns-radar { width: 2.6vw; margin: 0; order: 2; }
-  .ns-val { font-size: 2.6vw; line-height: 1; }
-  .ns-clock { font-size: 2.6vw; }
-  .ns-small { font-size: 2.6vw; }
   .ns-tags { min-height: 2.6vw; align-items: center; }
 }
 

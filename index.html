@@ -22,7 +22,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="/assets/fonts/inter-tight-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20261005-1">
+  <link rel="stylesheet" href="/styles.css?v=20261005-2">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -147,7 +147,7 @@
       </div>
       <div class="ns-cell">
         <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>Now</p>
-        <div class="ns-read"><span class="ns-val ns-clock">--:--:--</span><span class="ns-sub live-date"></span></div>
+        <div class="ns-read"><span class="ns-val ns-clock">--:--:--</span><span class="ns-lite live-date"></span></div>
         <p class="ns-desc">When something is actionable.</p>
       </div>
       <div class="ns-cell">
@@ -157,7 +157,7 @@
       </div>
       <div class="ns-cell">
         <p class="ns-label"><span class="ns-light" aria-hidden="true"></span>Nearby</p>
-        <div class="ns-read"><span class="ns-radar" aria-hidden="true"><i></i><i></i><i></i><b></b></span><span class="ns-val ns-small">800 m</span></div>
+        <div class="ns-read"><span class="ns-val ns-dist">800 m</span><span class="ns-lite">10 min walk</span></div>
         <p class="ns-desc">Ranked from near to far.</p>
       </div>
     </section>
@@ -234,17 +234,29 @@
     </div>
   </footer>
   <script>
-    // Live layer: show today's date next to NOW in the coordinates box
+    // Live strip: date, clock and distance in the visitor's own conventions. Nothing is requested or sent anywhere.
     (function () {
-      var d = new Date(), s = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+      var d = new Date(), pad = function (x) { return String(x).padStart(2, '0'); };
+      var s = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][d.getDay()] + ' ' + pad(d.getDate()) + ' ' +
+        ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'][d.getMonth()] + ' ' + d.getFullYear();
       document.querySelectorAll('.live-date').forEach(function (el) { el.textContent = s; });
-      // Live clock in the NOW column, in the visitor's own time
+      // Clock: 24-hour or AM/PM, following the visitor's own setting
+      var f; try { f = new Intl.DateTimeFormat(undefined, { hour: 'numeric', minute: '2-digit', second: '2-digit' }); } catch (e) {}
       var clocks = document.querySelectorAll('.ns-clock');
       function tick() {
-        var n = new Date(), t = [n.getHours(), n.getMinutes(), n.getSeconds()].map(function (x) { return String(x).padStart(2, '0'); }).join(':');
+        var n = new Date();
+        var t = f ? f.format(n) : [n.getHours(), n.getMinutes(), n.getSeconds()].map(pad).join(':');
         clocks.forEach(function (c) { c.textContent = t; });
       }
       if (clocks.length) { tick(); setInterval(tick, 1000); }
+      // Distance: miles where people walk in miles (US, UK, Liberia, Myanmar), metres everywhere else.
+      // The browser language's country decides; without one, the time zone does.
+      var lang = (navigator.languages && navigator.languages[0]) || navigator.language || '';
+      var m = lang.match(/-([A-Za-z]{2})(?![A-Za-z])/), tz = '';
+      try { tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ''; } catch (e) {}
+      var miles = m ? /^(US|GB|LR|MM)$/i.test(m[1])
+        : /^(America\/(New_York|Chicago|Denver|Los_Angeles|Phoenix|Anchorage|Detroit|Boise|Juneau|Sitka|Nome|Adak|Yakutat|Metlakatla|Menominee|Indiana\/.+|Kentucky\/.+|North_Dakota\/.+)|Pacific\/Honolulu|US\/.+|Europe\/(London|Belfast)|GB|Africa\/Monrovia|Asia\/(Yangon|Rangoon))$/.test(tz);
+      if (miles) document.querySelectorAll('.ns-dist').forEach(function (el) { el.textContent = '0.5 mi'; });
     })();
   </script>
   <script>
