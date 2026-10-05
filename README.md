@@ -18,3 +18,7 @@ The `CNAME` file sets the custom domain (plesion.com). DNS stays in Google Cloud
 Header and footer are repeated in each HTML file, so a change to a link there needs to be made in all three pages.
 
 After changing `styles.css`, bump the `?v=` value on the stylesheet link in all three HTML files, so browsers fetch the new version instead of a cached one.
+
+## Analytics
+
+Cloudflare Web Analytics (cookieless, free). The beacon snippet sits just before `</body>` on every page.
