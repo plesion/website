@@ -642,3 +642,11 @@ body.light .site-footer { border-top: 1px solid var(--line); }
 
 /* Translated legal pages: a short note under the title that the document is in English */
 .legal-note { margin: 14px 0 0; font: 400 0.9rem/1.45 var(--font-data); color: var(--fg-soft); }
+
+/* Titles on phones: short words share lines, balanced. The opening verb keeps its own line;
+   "beats" titles (Open. Discover. Go.; Real is good.) keep one word per line */
+@media (max-width: 900px) {
+  .live-title:not(.live-title--beats) span { display: inline; }
+  .live-title { text-wrap: balance; }
+  .live-title--lead span:first-child { display: block; }
+}
