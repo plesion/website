@@ -27,7 +27,7 @@
   <meta name="twitter:card" content="summary_large_image">
   <link rel="preload" href="/assets/fonts/inter-tight-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="/assets/fonts/ibm-plex-mono-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
-  <link rel="stylesheet" href="/styles.css?v=20261005-3">
+  <link rel="stylesheet" href="/styles.css?v=20261005-4">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -290,39 +290,7 @@
       el.innerHTML = dms(c[0], 'N', 'S', 2) + '<br>' + dms(c[1], 'E', 'W', 2);
     })();
   </script>
-  <script>
-    // Language: the footer switcher, and a one-time line when the browser prefers another language we have
-    (function () {
-      var PAGES = { en: '/', fr: '/fr/', it: '/it/' };
-      var HINT = { en: ['View this page in English', 'Close'], fr: ['Voir cette page en français', 'Fermer'], it: ['Visualizza questa pagina in italiano', 'Chiudi'] };
-      var cur = document.documentElement.lang;
-      function get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
-      function put(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
-      document.querySelectorAll('a[data-lang]').forEach(function (a) { a.addEventListener('click', function () { put('plesion-lang', a.getAttribute('data-lang')); }); });
-
-      var btn = document.querySelector('.lang-btn');
-      if (btn) {
-        var panel = document.getElementById('lang-panel'), veil = document.querySelector('.lang-veil');
-        var set = function (open) { btn.setAttribute('aria-expanded', open); panel.hidden = !open; veil.hidden = !open; if (open) panel.focus(); };
-        btn.addEventListener('click', function () { set(panel.hidden); });
-        panel.querySelector('.lang-close').addEventListener('click', function () { set(false); btn.focus(); });
-        veil.addEventListener('click', function () { set(false); });
-        document.addEventListener('click', function (e) { if (!panel.hidden && !e.target.closest('.lang')) set(false); });
-        document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !panel.hidden) { set(false); btn.focus(); } });
-      }
-
-      var bar = document.querySelector('.lang-hint');
-      if (!bar || get('plesion-lang') || get('plesion-lang-hint')) return;
-      var pref = null;
-      (navigator.languages || [navigator.language]).some(function (l) { var p = String(l || '').slice(0, 2).toLowerCase(); if (PAGES[p]) { pref = p; return true; } return false; });
-      if (!pref || pref === cur) return;
-      bar.innerHTML = '<a href="' + PAGES[pref] + '" lang="' + pref + '" hreflang="' + pref + '" data-lang="' + pref + '">' + HINT[pref][0] + ' →</a>' +
-        '<button type="button" aria-label="' + HINT[pref][1] + '" lang="' + pref + '">×</button>';
-      bar.querySelector('a').addEventListener('click', function () { put('plesion-lang', pref); });
-      bar.querySelector('button').addEventListener('click', function () { put('plesion-lang-hint', '1'); bar.hidden = true; });
-      bar.hidden = false;
-    })();
-  </script>
+  <script src="/assets/lang.js?v=20261005-1" defer></script>
   <!-- Cloudflare Web Analytics --><script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "6d3f76ef62d545f2af6ae02d0a30a107"}'></script><!-- End Cloudflare Web Analytics -->
 </body>
 </html>

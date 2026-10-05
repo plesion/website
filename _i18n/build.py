@@ -1,15 +1,17 @@
 #!/usr/bin/env python3
-"""Builds the translated home pages from the English one.
+"""Builds the French and Italian pages from the English ones.
 
-index.html (English) is the source. For each language below, this script copies it to
-<lang>/index.html, swaps every English string for its translation, and fills in the
-footer language switcher on every home page, English included.
+The English pages are the source: index.html, data-policy.html and terms-of-service.html.
+For each language below, this script copies them to <lang>/, swaps the English strings
+for their translations, and fills in the footer language switcher on every page,
+English included. The legal pages keep their English text: only the header, the footer
+and a short note are translated, and their canonical address stays the English page.
 
-Run it from the repository root after any change to index.html:
+Run it from the repository root after any change to one of those pages:
 
     python3 _i18n/build.py
 
-It stops with an error if an English string it expects is no longer in index.html,
+It stops with an error if an English string it expects is no longer in the page,
 so a wording change on the English page can't silently leave a translation behind.
 Jekyll (GitHub Pages) does not publish folders starting with an underscore, so this
 folder stays out of the live site.
@@ -32,11 +34,12 @@ CHECK = ('<svg class="lang-check" viewBox="0 0 24 24" aria-hidden="true" focusab
          '<path d="M5 12.5l4.2 4.2L19 7" fill="none" stroke="currentColor" stroke-width="2"/></svg>')
 
 
-def switcher(cur):
+def switcher(cur, page=''):
+    """The footer switcher for language `cur`; each language links to the same page (`page` is '' for home)."""
     _, _, name, word, choose, close = next(l for l in LANGS if l[0] == cur)
     items = ''.join(
         '<li><a href="%s" lang="%s" hreflang="%s" data-lang="%s"%s>%s%s</a></li>'
-        % (path, code, code, code, ' aria-current="true"' if code == cur else '', label, CHECK if code == cur else '')
+        % (path + page, code, code, code, ' aria-current="true"' if code == cur else '', label, CHECK if code == cur else '')
         for code, path, label, *_ in LANGS)
     return ('<!-- lang:switch --><div class="lang">'
             '<button class="lang-btn" type="button" aria-expanded="false" aria-controls="lang-panel" aria-label="%s: %s">%s<span>%s</span></button>'
@@ -46,7 +49,8 @@ def switcher(cur):
             % (word, name, GLOBE, name, choose, choose, close, items))
 
 
-# English HTML fragment -> translation. Fragments are matched exactly as they appear in index.html.
+# English HTML fragment -> translation, for the home page. Fragments are matched exactly as they appear in index.html.
+# The ones listed in COMMON (skip link and footer) are also applied to the legal pages.
 T = {
  'fr': [
   ('<title>PLESION | Real life. Around you. Here. Now.</title>', '<title>PLESION | La vraie vie. Autour de vous. Ici. Maintenant.</title>'),
@@ -96,8 +100,8 @@ T = {
   ('>Company news on LinkedIn<', '>L\'entreprise sur LinkedIn<'),
   ('>Insights on Medium<', '>Analyses sur Medium<'),
   ('<nav aria-label="Legal">', '<nav aria-label="Mentions légales">'),
-  ('<a href="/data-policy">Data policy</a>', '<a href="/data-policy" hreflang="en">Politique de données</a>'),
-  ('<a href="/terms-of-service">Terms of service</a>', '<a href="/terms-of-service" hreflang="en">Conditions d\'utilisation</a>'),
+  ('<a href="/data-policy">Data policy</a>', '<a href="/fr/data-policy">Politique de données</a>'),
+  ('<a href="/terms-of-service">Terms of service</a>', '<a href="/fr/terms-of-service">Conditions d\'utilisation</a>'),
  ],
  'it': [
   ('<title>PLESION | Real life. Around you. Here. Now.</title>', '<title>PLESION | La vita reale. Intorno a te. Qui. Ora.</title>'),
@@ -147,10 +151,68 @@ T = {
   ('>Company news on LinkedIn<', '>L\'azienda su LinkedIn<'),
   ('>Insights on Medium<', '>Approfondimenti su Medium<'),
   ('<nav aria-label="Legal">', '<nav aria-label="Note legali">'),
-  ('<a href="/data-policy">Data policy</a>', '<a href="/data-policy" hreflang="en">Informativa sui dati</a>'),
-  ('<a href="/terms-of-service">Terms of service</a>', '<a href="/terms-of-service" hreflang="en">Termini di servizio</a>'),
+  ('<a href="/data-policy">Data policy</a>', '<a href="/it/data-policy">Informativa sui dati</a>'),
+  ('<a href="/terms-of-service">Terms of service</a>', '<a href="/it/terms-of-service">Termini di servizio</a>'),
  ],
 }
+
+# English fragments from T that belong to the skip link and the footer, shared by every page.
+COMMON = {
+    '<a class="skip" href="#main">Skip to content</a>',
+    '<img src="/assets/badge-app-store.svg" alt="Download on the App Store" width="120" height="40">',
+    '<img src="/assets/badge-google-play.svg" alt="Get it on Google Play" width="135" height="40">',
+    'class="footer-logo" href="/" aria-label="PLESION home"',
+    '<span>Real life. Around you.</span> <span>Here. Now.</span>',
+    'aria-label="PLESION on social media and app stores"',
+    '>News on Instagram<', '>Videos on TikTok<', '>News on Facebook<', '>News on X<', '>Company news on LinkedIn<', '>Insights on Medium<',
+    '<nav aria-label="Legal">',
+    '<a href="/data-policy">Data policy</a>',
+    '<a href="/terms-of-service">Terms of service</a>',
+}
+
+# The legal pages: header, title and a note that the text is in English. The document itself is not translated.
+TABS_EN = '<nav class="legal-tabs" aria-label="Legal documents"><a href="/data-policy"%s>Data policy</a><a href="/terms-of-service"%s>Terms of service</a></nav>'
+LEGAL_WORDS = {
+    # lang: (home label, tabs label, data policy, terms of service, note, description data policy, description terms)
+    'fr': ('Accueil PLESION', 'Documents juridiques', 'Politique de données', "Conditions d'utilisation",
+           'Ce document est disponible en anglais uniquement.',
+           'Comment PLESION traite vos données. Document en anglais.', "Les conditions d'utilisation de PLESION. Document en anglais."),
+    'it': ('Home PLESION', 'Documenti legali', 'Informativa sui dati', 'Termini di servizio',
+           'Questo documento è disponibile solo in inglese.',
+           'Come PLESION tratta i tuoi dati. Documento in inglese.', 'I termini di utilizzo di PLESION. Documento in inglese.'),
+}
+LEGAL_PAGES = [
+    # file, path, English title, English description, which tab is current (0 or 1)
+    ('data-policy.html', 'data-policy', 'Data Policy', 'How PLESION handles your data.', 0),
+    ('terms-of-service.html', 'terms-of-service', 'Terms of Service', 'The terms for using PLESION.', 1),
+]
+
+
+def legal_pairs(code, path, title_en, desc_en, cur):
+    home, tabs, dp, ts, note, d_dp, d_ts = LEGAL_WORDS[code]
+    title, desc = (dp, d_dp) if cur == 0 else (ts, d_ts)
+    mark = lambda i: ' aria-current="page"' if i == cur else ''
+    return [
+        ('<title>%s | PLESION</title>' % title_en, '<title>%s | PLESION</title>' % title),
+        ('content="%s | PLESION"' % title_en, 'content="%s | PLESION"' % title),
+        ('content="%s"' % desc_en, 'content="%s"' % desc),
+        ('<a class="logo" href="/" aria-label="PLESION home">', '<a class="logo" href="/%s/" aria-label="%s">' % (code, home)),
+        (TABS_EN % (mark(0), mark(1)),
+         '<nav class="legal-tabs" aria-label="%s"><a href="/%s/data-policy"%s>%s</a><a href="/%s/terms-of-service"%s>%s</a></nav>'
+         % (tabs, code, mark(0), dp, code, mark(1), ts)),
+        ('<h1>%s</h1>' % title_en, '<h1>%s</h1>\n        <p class="legal-note">%s</p>' % (title, note)),
+        ('<article>', '<article lang="en">'),
+    ]
+
+
+def translate(h, pairs, where):
+    missing = [en for en, _ in pairs if en not in h]
+    if missing:
+        sys.exit('%s: these English strings are no longer there:\n  %s' % (where, '\n  '.join(missing)))
+    for en, tr in pairs:
+        h = h.replace(en, tr)
+    return h
+
 
 SWITCH_RE = re.compile(r'<!-- lang:switch -->.*?<!-- /lang:switch -->', re.S)
 
@@ -164,20 +226,22 @@ def webpage_jsonld(code, path, name, description):
 
 
 def main():
-    src_path = os.path.join(ROOT, 'index.html')
-    src = open(src_path, encoding='utf-8').read()
-    if not SWITCH_RE.search(src):
-        sys.exit('index.html has no <!-- lang:switch --> marker in the footer')
-    src = SWITCH_RE.sub(lambda m: switcher('en'), src)
-    open(src_path, 'w', encoding='utf-8').write(src)
+    def read(name):
+        h = open(os.path.join(ROOT, name), encoding='utf-8').read()
+        if not SWITCH_RE.search(h):
+            sys.exit('%s has no <!-- lang:switch --> marker in the footer' % name)
+        return h
 
+    def write(name, h):
+        os.makedirs(os.path.dirname(os.path.join(ROOT, name)), exist_ok=True)
+        open(os.path.join(ROOT, name), 'w', encoding='utf-8').write(h)
+        print('wrote', name)
+
+    # Home
+    src = SWITCH_RE.sub(lambda m: switcher('en'), read('index.html'))
+    write('index.html', src)
     for code, path, *_ in LANGS[1:]:
-        h = src
-        missing = [en for en, _ in T[code] if en not in h]
-        if missing:
-            sys.exit('%s: these English strings are no longer in index.html:\n  %s' % (code, '\n  '.join(missing)))
-        for en, tr in T[code]:
-            h = h.replace(en, tr)
+        h = translate(src, T[code], '%s/index.html' % code)
         h = h.replace('<html lang="en">', '<html lang="%s">' % code, 1)
         h = h.replace('<link rel="canonical" href="%s/">' % SITE, '<link rel="canonical" href="%s%s">' % (SITE, path), 1)
         h = h.replace('<meta property="og:url" content="%s/">' % SITE, '<meta property="og:url" content="%s%s">' % (SITE, path), 1)
@@ -185,9 +249,19 @@ def main():
         desc = re.search(r'<meta name="description" content="(.*?)">', h).group(1)
         h = re.sub(r'<script type="application/ld\+json">.*?</script>', lambda m: webpage_jsonld(code, path, title, desc), h, count=1, flags=re.S)
         h = SWITCH_RE.sub(lambda m: switcher(code), h)
-        os.makedirs(os.path.join(ROOT, code), exist_ok=True)
-        open(os.path.join(ROOT, code, 'index.html'), 'w', encoding='utf-8').write(h)
-        print('wrote %s/index.html' % code)
+        write('%s/index.html' % code, h)
+
+    # Legal pages: English text, local header and footer; the canonical address stays the English page
+    for name, page, title_en, desc_en, cur in LEGAL_PAGES:
+        src = SWITCH_RE.sub(lambda m: switcher('en', page), read(name))
+        write(name, src)
+        for code, *_ in LANGS[1:]:
+            # legal_pairs first: the header tabs contain the same links as the footer
+            pairs = legal_pairs(code, page, title_en, desc_en, cur) + [(en, tr) for en, tr in T[code] if en in COMMON]
+            h = translate(src, pairs, '%s/%s' % (code, name))
+            h = h.replace('<html lang="en">', '<html lang="%s">' % code, 1)
+            h = SWITCH_RE.sub(lambda m: switcher(code, page), h)
+            write('%s/%s' % (code, name), h)
 
 
 if __name__ == '__main__':
