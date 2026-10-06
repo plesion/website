@@ -86,7 +86,7 @@ T = {
    '<span class="l l1">Ici.</span> <span class="l l2">Maintenant.</span> <span class="l l3">Pour vous<span'),
   ('<p class="live-eyebrow">Physical relevance</p>', '<p class="live-eyebrow">Pertinence physique</p>'),
   ('<h2 id="lived-title" class="live-title live-title--beats">', '<h2 id="lived-title" class="live-title">'),
-  ('<span>Real</span> <span>is</span> <span>good.</span>', '<span>Vive</span> <span>le</span> <span>réel.</span>'),
+  ('<span>Real</span> <span>is</span> <span>good.</span>', '<span>Vive</span> <span>le&nbsp;réel.</span>'),
   ('Escape the endless scroll. PLESION helps you enjoy real life with real people.',
    'Sortez du scroll sans fin. PLESION vous aide à profiter de la vraie vie, avec de vraies personnes.'),
   ('aria-label="A young man with a backpack looks out at sunset over a city of brick buildings and street murals, phone in hand, with posts for live jazz, an outdoor film, a gallery opening and a night market pinned across the view."',
