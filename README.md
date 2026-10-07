@@ -29,7 +29,7 @@ English is the source. After any change to `index.html`, `data-policy.html` or `
 
 To add a language: add a line to `LANGS` and a list of translations to `T` in `_i18n/build.py`, add it to `PAGES` and `HINT` in `assets/lang.js`, add the legal page words to `LEGAL_WORDS` and to the date names in the live strip script, add its `hreflang` link in the head of `index.html` and to `sitemap.xml`, then run the script.
 
-The legal documents stay in English for now. The French and Italian legal pages keep the English text with a translated header, footer and a one-line note, so visitors stay in their language; their canonical address is the English page, so search engines don't treat them as separate documents.
+The legal documents stay in English for now. The French and Italian legal pages keep the English text with a translated header, footer and a one-line note, so visitors stay in their language; their canonical address is the English page, so search engines don't treat them as separate documents. All legal pages carry `noindex`: they stay reachable from every footer but are kept out of search results, and they're not in `sitemap.xml`.
 
 ## Analytics
 
