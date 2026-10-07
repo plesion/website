@@ -14,6 +14,7 @@ The `CNAME` file sets the custom domain (plesion.com). DNS stays in Google Cloud
 | `terms-of-service.html` | plesion.com/terms-of-service |
 | `download.html` | plesion.com/download: one link for social bios. Phones go straight to the App Store or Google Play (tagged with the platform the visitor came from); computers see the badges and a QR code |
 | `404.html` | Shown for any address that doesn't exist |
+| `fr/home.html` | Old address from the previous site (plesion.com/fr/home): forwards to /fr/ |
 | `robots.txt`, `sitemap.xml` | Tell search engines which pages exist |
 | `styles.css` | Styles shared by all pages |
 | `assets/` | Logo, handwritten wordmark, favicons |
